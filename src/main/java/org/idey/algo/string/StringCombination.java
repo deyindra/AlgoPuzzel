@@ -52,7 +52,7 @@ public class StringCombination {
     }
 
     public static void main(String[] args) {
-        String str = "A?B?C";
+        String str = "A?B?C?";
         List<String> list = generatePermutation(str, new char[]{'X', 'Y', 'Z'}, '?');
         System.out.println(list);
     }
