@@ -39,6 +39,6 @@ public class WordBreak {
     }
 
     public static void main(String[] args) {
-        System.out.println(wordBreak("  sefr\"serf se\"fr      serf ef\"zs\"df     ch rth r\"htr xferf we    crth crh\"crt h  "));
+        System.out.println(wordBreak("\"ANC E\"FG    XYZ  1  AMC \"ANC\" ABC  XYZ H"));
     }
 }
