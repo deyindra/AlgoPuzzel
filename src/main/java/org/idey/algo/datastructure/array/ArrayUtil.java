@@ -88,6 +88,35 @@ public class ArrayUtil {
         }
     }
 
+    //find one duplicte element
+    public static int returnDeuplicate(int[] array){
+        int result=0;
+        for(int i=0;i<array.length;i++){
+            result = result^array[i]^i;
+        }
+        return result;
+    }
+
+    //Number ranges from 0 to n-2
+    public static int returnAnyDeuplicate(int[] array){
+        int slow = array.length-1;
+        int fast = array.length-1;
+        while (true){
+            slow = array[slow];
+            fast = array[array[fast]];
+            if(slow==fast)
+                break;
+        }
+        int finder = array.length-1;
+        while (true){
+            slow   = array[slow];
+            finder = array[finder];
+            if(slow==finder)
+                return slow;
+        }
+    }
+
+
     public static void main(String[] args) {
         Filter<Integer> evenFilter = new Filter<Integer>() {
             @Override
@@ -112,5 +141,11 @@ public class ArrayUtil {
 //        Integer[] array=new Integer[]{5,5,2,7,9,10,1,16,3,3};
 //        rearrange(array,evenFilter);
 //        System.out.println(Arrays.deepToString(array));
+
+        System.out.println(returnDeuplicate(new int[]{1,2,4,2,3}));
+        System.out.println(returnAnyDeuplicate(new int[]{0,2,3,1,3}));
+
     }
+
+
 }

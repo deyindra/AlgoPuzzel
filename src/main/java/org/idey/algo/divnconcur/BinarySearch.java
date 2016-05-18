@@ -174,6 +174,9 @@ public class BinarySearch<T> {
             }
         }));
 
+
+        System.out.println(getMinMax(new int[]{2,1,-1,11,16,-8}));
+
     }
 
 
@@ -475,5 +478,62 @@ public class BinarySearch<T> {
         return count;
 
     }
+
+
+    private static class MinMax{
+        private int min;
+        private int max;
+
+        @Override
+        public String toString() {
+            return "MinMax{" +
+                    "min=" + min +
+                    ", max=" + max +
+                    '}';
+        }
+    }
+
+
+    public static MinMax getMinMax(int[] array){
+        MinMax minMax = new MinMax();
+        int i=0;
+        int length = array.length;
+        if(length%2==0){
+            if(array[0]>array[i]){
+                minMax.max=array[0];
+                minMax.min=array[1];
+            }else{
+                minMax.max=array[1];
+                minMax.min=array[0];
+            }
+            i=2;
+        }else{
+            minMax.max=array[0];
+            minMax.min=array[0];
+            i=1;
+        }
+
+        while (i<length){
+            if(array[i]>array[i+1]){
+                if(minMax.min>array[i+1]){
+                    minMax.min=array[i+1];
+                }
+                if(minMax.max<array[i]){
+                    minMax.max=array[i];
+                }
+            }else{
+                if(minMax.min>array[i]){
+                    minMax.min=array[i];
+                }
+                if(minMax.max<array[i+1]){
+                    minMax.max=array[i+1];
+                }
+            }
+            i=i+2;
+        }
+        return minMax;
+    }
+
+
 
 }
