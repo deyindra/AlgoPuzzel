@@ -29,7 +29,7 @@ public class NArrayTreeCodec<E> {
         }
         String str = serialize.serialize(node.getData());
         sb.append(seperator).append(str);
-        for(NArrayTreeNode child:node.getChilds()){
+        for(NArrayTreeNode<E> child:node.getChilds()){
             buildString(child,sb,",");
         }
         sb.append(",").append(MARKER);

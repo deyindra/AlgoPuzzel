@@ -143,7 +143,7 @@ public class ArrayUtil {
 //        System.out.println(Arrays.deepToString(array));
 
         System.out.println(returnDeuplicate(new int[]{1,2,4,2,3}));
-        System.out.println(returnAnyDeuplicate(new int[]{0,2,3,1,3}));
+        System.out.println(returnAnyDeuplicate(new int[]{2,2,3,2,3}));
 
     }
 
