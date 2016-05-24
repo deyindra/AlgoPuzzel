@@ -10,9 +10,7 @@ public class NArrayUtil {
         if(node==null){
             return null;
         }
-        for(NArrayTreeNode<T> child:node.getChilds()){
-            reverseTree(child);
-        }
+        node.getChilds().forEach(NArrayUtil::reverseTree);
         List<NArrayTreeNode<T>> list = node.getChilds();
         for(int i=0,j=list.size()-1;i<j;i++,j--){
             NArrayTreeNode<T> left = list.get(i);

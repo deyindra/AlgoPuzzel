@@ -23,6 +23,25 @@ public class ArrayUtil {
         }
     }
 
+    public static <T> void rearrangeAlternate(T[] arr, Filter<T> filter){
+        if(arr.length>1) {
+            segrate(arr, filter);
+            int left = 1;
+            int high = 0;
+            while (filter.validate(arr[high])) {
+                high++;
+            }
+            int right = high;
+            while (filter.validate(arr[left]) && right < arr.length) {
+                T temp = arr[left];
+                arr[left] = arr[right];
+                arr[right] = temp;
+                left = left + 2;
+                right++;
+            }
+        }
+    }
+
 
 
     public static <T> void moveAllSpecificObjectTowardsEnd(T[] array, T object){
@@ -132,18 +151,22 @@ public class ArrayUtil {
 //        moveAllSpecificObjectTowardsEnd(arr1,0);
 //        System.out.println(Arrays.deepToString(arr1));
 //
-        Integer[] a = new Integer[]{null,4,null,5,null};
-        Integer[] b = new Integer[]{2,4,10};
+        //Integer[] a = new Integer[]{null,4,null,5,null};
+        //Integer[] b = new Integer[]{2,4,10};
 
-        mergeTwoSortedArray(a,b);
-        System.out.println(Arrays.deepToString(a));
+        //mergeTwoSortedArray(a,b);
+        //System.out.println(Arrays.deepToString(a));
 
 //        Integer[] array=new Integer[]{5,5,2,7,9,10,1,16,3,3};
 //        rearrange(array,evenFilter);
 //        System.out.println(Arrays.deepToString(array));
 
-        System.out.println(returnDeuplicate(new int[]{1,2,4,2,3}));
-        System.out.println(returnAnyDeuplicate(new int[]{2,2,3,2,3}));
+        //System.out.println(returnDeuplicate(new int[]{1,2,4,2,3}));
+        //System.out.println(returnAnyDeuplicate(new int[]{2,2,3,2,3}));
+
+        Integer[] arr = new Integer[]{2,3,5,9,7,4};
+        rearrangeAlternate(arr, evenFilter);
+        System.out.println(Arrays.deepToString(arr));
 
     }
 
