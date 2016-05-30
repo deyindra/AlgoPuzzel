@@ -2,18 +2,16 @@ package org.idey.algo.window;
 
 public class MaximumSumOfKSubarray {
     public static int maxSumOfKSubArray(int[] array, int k){
-        int previousSum=0;
         int maxSum;
         int sum=0;
         for(int i=0;i<k;i++){
-            previousSum = previousSum+array[i];
+            sum = sum+array[i];
         }
-        maxSum=previousSum;
+        maxSum=sum;
         for(int i=k;i<array.length;i++){
-            sum=previousSum+array[i]-array[i-k];
-            previousSum=sum;
-            if(maxSum<previousSum){
-                maxSum=previousSum;
+            sum=sum+array[i]-array[i-k];
+            if(maxSum<sum){
+                maxSum=sum;
             }
         }
         return maxSum;
