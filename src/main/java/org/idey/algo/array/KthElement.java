@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class KthElement {
@@ -30,13 +31,20 @@ public class KthElement {
             T median = findMediansOfMedians(list);
             List<T> left = new ArrayList<>();
             List<T> right = new ArrayList<>();
-            if(isMin){
-                left.addAll((list.stream().parallel().filter(obj -> median.compareTo(obj) > 0).collect(Collectors.toList())));
-                right.addAll(list.stream().parallel().filter(obj -> median.compareTo(obj) < 0).collect(Collectors.toList()));
-            }else{
-                left.addAll((list.stream().parallel().filter(obj -> median.compareTo(obj) < 0).collect(Collectors.toList())));
-                right.addAll(list.stream().parallel().filter(obj -> median.compareTo(obj) > 0).collect(Collectors.toList()));
-            }
+            list.stream().parallel().forEach(new Consumer<T>() {
+                @Override
+                public synchronized void accept(T t) {
+                    if(isMin ? (median.compareTo(t)>0) : median.compareTo(t)<0){
+                        left.add(t);
+                    }
+
+                    if(isMin ? (median.compareTo(t)<0) : median.compareTo(t)>0){
+                        right.add(t);
+                    }
+
+                }
+            });
+
             if(k<=left.size()){
                 return findKthElement(left,k, isMin);
             }else if(k==left.size()+1){
@@ -58,6 +66,8 @@ public class KthElement {
         System.out.println(list2);
         System.out.println(findKthElement(list1,6, false));
     }
+
+
 
 
 }
