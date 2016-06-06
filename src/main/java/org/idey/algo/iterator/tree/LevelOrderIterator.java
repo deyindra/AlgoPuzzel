@@ -4,7 +4,7 @@ import org.idey.algo.datastructure.tree.TreeNode;
 
 import java.util.NoSuchElementException;
 
-public class LevelOrderIterator<E> extends AbstrackBFSIterator<E>{
+public class LevelOrderIterator<E> extends AbstractTreeBFSIterator<E> {
     public LevelOrderIterator(TreeNode<E> root) {
         super(root);
         this.queue.add(root);

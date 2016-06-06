@@ -4,7 +4,7 @@ import org.idey.algo.datastructure.tree.TreeNode;
 
 import java.util.NoSuchElementException;
 
-public class ZigZagLevelOrderIterator<E> extends AbstrackBFSIterator<E>{
+public class ZigZagLevelOrderIterator<E> extends AbstractTreeBFSIterator<E> {
     private boolean fromLeftToRight;
     public ZigZagLevelOrderIterator(TreeNode<E> root) {
         super(root);
