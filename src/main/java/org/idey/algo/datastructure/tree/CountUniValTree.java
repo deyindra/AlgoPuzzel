@@ -69,18 +69,22 @@ public class CountUniValTree<E> {
         C.addLeft(D).addRight(E);
         A.addLeft(B).addRight(C);
 
-        CountUniValTree<Integer> countUniValTree = new CountUniValTree<>(A);
-        System.out.println(countUniValTree.countUnival());
-        System.out.println(heightRecurrsive(A));
-        System.out.println(heightIterative(A));
-        printTopView(A);
-        System.out.println("\n");
-        printBottomView(A);
+        TreeNode<Integer> X = new TreeNode<>(100);
 
-        System.out.println("\n");
-        printLevelOrder(A);
+//        CountUniValTree<Integer> countUniValTree = new CountUniValTree<>(A);
+//        System.out.println(countUniValTree.countUnival());
+//        System.out.println(heightRecurrsive(A));
+//        System.out.println(heightIterative(A));
+//        printTopView(A);
+//        System.out.println("\n");
+//        printBottomView(A);
+//
+//        System.out.println("\n");
+//        printLevelOrder(A);
 
-        System.out.println(LCA(A,B,G));
+        System.out.println(LCA(A,G,B));
+        System.out.println(LCAMulti(A,new LinkedHashSet<>(Arrays.asList(G,F,X))));
+
     }
 
     public static <E> int heightRecurrsive(TreeNode<E> node){
@@ -210,23 +214,102 @@ public class CountUniValTree<E> {
         }
     }
 
-    public static <E> TreeNode<E> LCA(TreeNode<E> root, final TreeNode<E> first, final TreeNode<E> second){
-        if(root==null)
-            return null;
-        if(root.equals(first) || root.equals(second)){
+    private static <E> TreeNode<E> returnLCA(boolean flag, TreeNode<E> root, TreeNode<E> left, TreeNode<E> right){
+        if(flag)
             return root;
-        }
-
-        TreeNode<E>  left = LCA(root.getLeft(), first, second);
-        TreeNode<E>  right = LCA(root.getRight(), first, second);
-
-        if(left!=null && right!=null){
+        else if(left!=null && right!=null){
             return  root;
         }
-        if(left!=null){
+        else if(left!=null){
             return left;
-        }else{
+        }else if(right!=null){
             return right;
+        }else{
+            return null;
         }
     }
+
+    private static <E> TreeNode<E> LCA(TreeNode<E> root, BitSet set, final TreeNode<E> first, final TreeNode<E> second){
+        boolean flag = false;
+
+        if(root==null)
+            return null;
+        if(root.equals(first)){
+            set.set(0,true);
+            flag=true;
+        }
+        if(root.equals(second)){
+            set.set(1,true);
+            flag=true;
+        }
+
+        TreeNode<E>  left = LCA(root.getLeft(), set,first, second);
+        TreeNode<E>  right = LCA(root.getRight(), set, first, second);
+
+        return returnLCA(flag,root,left,right);
+    }
+
+
+    private static <E> TreeNode<E> LCAMulti(TreeNode<E> root, BitSet set, Map<TreeNode<E>, Integer> lcaMap){
+        boolean flag = false;
+
+        if(root==null)
+            return null;
+
+        for(Map.Entry<TreeNode<E>, Integer> entry:lcaMap.entrySet()){
+            TreeNode<E> node = entry.getKey();
+            int bitPosition = entry.getValue();
+            if(root.equals(node)){
+                set.set(bitPosition,true);
+                flag=true;
+            }
+        }
+
+        TreeNode<E>  left = LCAMulti(root.getLeft(), set,lcaMap);
+        TreeNode<E>  right = LCAMulti(root.getRight(), set,lcaMap);
+
+        return returnLCA(flag,root,left,right);
+    }
+
+    public static <E> TreeNode<E> LCA(TreeNode<E> root, final TreeNode<E> first, final TreeNode<E> second){
+        BitSet booleanSets = new BitSet(2);
+        booleanSets.set(0,2,false);
+
+        TreeNode<E> lca = LCA(root,booleanSets,first,second);
+
+        if(booleanSets.get(0) && booleanSets.get(1))
+            return lca;
+        else {
+            return null;
+        }
+    }
+
+
+
+
+    public static <E> TreeNode<E> LCAMulti(TreeNode<E> root, Set<TreeNode<E>> lcaSets){
+        Map<TreeNode<E>, Integer> map = new LinkedHashMap<>();
+        int count=0;
+        for(TreeNode<E> val:lcaSets){
+            map.put(val,count);
+            count++;
+        }
+        BitSet booleanSets = new BitSet(count);
+        booleanSets.set(0,count,false);
+
+        TreeNode<E> lca = LCAMulti(root,booleanSets,map);
+
+        boolean finalResult = true;
+        for(int i=0;i<count;i++){
+            finalResult = finalResult && booleanSets.get(i);
+        }
+
+        if(finalResult){
+            return lca;
+        }else{
+            return null;
+        }
+
+    }
+
 }
