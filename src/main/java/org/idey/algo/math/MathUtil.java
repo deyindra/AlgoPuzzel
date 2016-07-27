@@ -128,6 +128,23 @@ public class MathUtil {
         return sets;
     }
 
+    public static Set<Integer> findAllEvenOccuranceNumber(int[] array){
+        Set<Integer> duplicateSets = new HashSet<>();
+        Set<Integer> nonDuplicateSets = new HashSet<>();
+
+        for(int val:array){
+            boolean status = nonDuplicateSets.add(val);
+            if(status){
+                duplicateSets.remove(val);
+            }else{
+                nonDuplicateSets.remove(val);
+                duplicateSets.add(val);
+            }
+        }
+
+        return duplicateSets;
+    }
+
     //With O(n) extra space with O(1) time
     public static int findAllOneOddOccurance(int[] array){
         int xor=array[0];
@@ -202,10 +219,12 @@ public class MathUtil {
 //        System.out.println(convertToBase16(164));
 //        System.out.println(findingNthFibo(4,1,2));
 //        System.out.println(convertFromBase16ToDeciman(""));
-        for(int i=1;i<=144;i++)
-            System.out.print(" "+getRandomObjectWithGivenProbability(new Integer[]{2,3,4}, new Integer[]{1,10,1}));
+//        for(int i=1;i<=144;i++)
+//            System.out.print(" "+getRandomObjectWithGivenProbability(new Integer[]{2,3,4}, new Integer[]{1,10,1}));
+//
+//        System.out.println("\n"+factorial(4,1));
 
-        System.out.println("\n"+factorial(4,1));
+          System.out.println(findAllEvenOccuranceNumber(new int[] {1,5,1,5,5,3,3,2}));
     }
 
 

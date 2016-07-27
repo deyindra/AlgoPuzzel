@@ -161,12 +161,12 @@ public class ArrayUtil {
 //        rearrange(array,evenFilter);
 //        System.out.println(Arrays.deepToString(array));
 
-        //System.out.println(returnDeuplicate(new int[]{1,0,1,1,0}));
-        System.out.println(returnAnyDeuplicate(new int[]{3,2,3,1,1}));
-
-        Integer[] arr = new Integer[]{2,3,5,9,7,4};
-        rearrangeAlternate(arr, evenFilter);
-        System.out.println(Arrays.deepToString(arr));
+        System.out.println(returnDeuplicate(new int[]{5,0,1,1,3,}));
+//        System.out.println(returnAnyDeuplicate(new int[]{3,2,3,1,1}));
+//
+//        Integer[] arr = new Integer[]{2,3,5,9,7,4};
+//        rearrangeAlternate(arr, evenFilter);
+//        System.out.println(Arrays.deepToString(arr));
 
     }
 

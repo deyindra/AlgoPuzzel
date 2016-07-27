@@ -14,12 +14,8 @@ public class KFrequentElement<T extends  Comparable<T>> {
         this.limit = limit;
         this.isMax = isMax;
         map = new HashMap<>();
-        priorityQueue = new PriorityQueue<>(new Comparator<ElementCounter<T>>() {
-            @Override
-            public int compare(ElementCounter<T> o1, ElementCounter<T> o2) {
-                return isMax ? (o1.counter-o2.counter):-(o1.counter-o2.counter);
-            }
-        });
+        priorityQueue = new PriorityQueue<>((Comparator<ElementCounter<T>>) (o1, o2) -> isMax ?
+                (o1.counter-o2.counter):-(o1.counter-o2.counter));
     }
 
     private class ElementCounter<T>{
