@@ -71,7 +71,67 @@ public class StackUtil<T> {
             System.out.println(s.pop());
         }
         System.out.println(checkBalancedParantheSis("[[()]]["));
+        System.out.println(simplyUnixPath("/a//b"));
     }
 
+
+    public static String simplyUnixPath(String str){
+        if(str==null){
+            throw new IllegalArgumentException("Invalid Path");
+        }else{
+            int length = str.length();
+            if(length==0){
+                return str;
+            }else{
+                String[] splits = str.split("[/]+");
+                LinkedList<String> stack = new LinkedList<>();
+                for (String s : splits) {
+                    if(s.equals("/"))
+                        continue;
+                    if(s.equals("..")){
+                        if(!stack.isEmpty())
+                            stack.pop();
+                    }else{
+                        if(!s.equals(".")  && !s.equals(""))
+                            stack.push(s);
+                    }
+                }
+
+                if(stack.isEmpty()) return "/";
+                String ret = "";
+                while(!stack.isEmpty()){
+                    ret += "/" + stack.removeLast();
+                }
+                return ret;
+            }
+        }
+    }
+
+    public static int findMaxDepth(String str){
+        int currentMax=0;
+        int max=0;
+        if(str==null || str.length()==0){
+            throw new IllegalArgumentException("Invalid string");
+        }
+        for(int i=0;i<str.length();i++){
+            if(str.charAt(i)=='('){
+                currentMax++;
+                if(currentMax>max){
+                    max=currentMax;
+                }
+            }else if(str.charAt(i)==')'){
+                if(currentMax>0)
+                    currentMax--;
+                else{
+                    throw new IllegalArgumentException("Paranthesis is not balanced");
+                }
+            }
+        }
+
+        if(currentMax!=0){
+            throw new IllegalArgumentException("Paranthesis is not balanced");
+        }
+        return max;
+    }
 
 }
