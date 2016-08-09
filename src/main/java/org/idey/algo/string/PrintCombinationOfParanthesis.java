@@ -29,7 +29,7 @@ public class PrintCombinationOfParanthesis {
     }
 
     public static void main(String[] args) {
-        List<String> list = generateParenthesis(3);
+        List<String> list = generateParenthesis(2);
         System.out.println(list);
     }
 }

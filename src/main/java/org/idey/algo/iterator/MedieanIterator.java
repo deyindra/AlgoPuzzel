@@ -6,29 +6,30 @@ import java.util.NoSuchElementException;
 import java.util.PriorityQueue;
 
 public class MedieanIterator<T extends Comparable<T>> implements Iterator<T> {
-    private T median;
     private T[] array;
-    private int size;
+    private T median;
     private int currentIndex;
-    private PriorityQueue<T> minHeap = new PriorityQueue<>();
-    private PriorityQueue<T> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+    private final int size;
+    private PriorityQueue<T> minHeap = new PriorityQueue<T>();
+    private PriorityQueue<T> maxHeap = new PriorityQueue<T>(Collections.reverseOrder());
+
 
     public MedieanIterator(T[] array, int size) {
         if(array==null || array.length==0){
-            throw new IllegalArgumentException("Invalid Array...");
+            throw new IllegalArgumentException("Invalid Array");
         }
         if(size<=0 || size>array.length){
-            throw new IllegalArgumentException("Invalid size "+size);
+            throw new IllegalArgumentException("Invalid window size");
         }
         this.array = array;
         this.size = size;
+        maxHeap.offer(this.array[currentIndex]);
         currentIndex=1;
-        maxHeap.offer(array[0]);
-        for(;currentIndex<this.size;currentIndex++){
+        for(;currentIndex<size;currentIndex++){
             add(array[currentIndex]);
         }
-        median = maxHeap.peek();
         currentIndex--;
+        median = maxHeap.peek();
     }
 
     @Override
@@ -41,43 +42,48 @@ public class MedieanIterator<T extends Comparable<T>> implements Iterator<T> {
         if(!hasNext()){
             throw new NoSuchElementException("No more element");
         }
-        T prevMediean = median;
+        T prevMedian = median;
         currentIndex++;
-        if(currentIndex<=array.length-1) {
+        if(currentIndex<=array.length-1){
             add(array[currentIndex]);
-            remove(array[currentIndex - this.size]);
+            remove(array[currentIndex-size]);
             median = maxHeap.peek();
         }
-        return prevMediean;
+        return prevMedian;
     }
 
-    private void add(T val) {
-        T preMedian = maxHeap.peek();
-        if (val.compareTo(preMedian)>0) {
-            minHeap.offer(val);
-        } else {
-            maxHeap.offer(val);
+    public void add(T obj){
+        T peek = maxHeap.peek();
+        if(obj.compareTo(peek)>0){
+            minHeap.offer(obj);
+        }else{
+            maxHeap.offer(obj);
         }
         balance();
     }
 
-
-    private void remove(T val) {
-        T preMedian = maxHeap.peek();
-        if (val.compareTo(preMedian)>0) {
-            minHeap.remove(val);
-        } else {
-            maxHeap.remove(val);
+    public void remove(T obj){
+        T peek = maxHeap.peek();
+        if(obj.compareTo(peek)>0){
+            minHeap.remove(obj);
+        }else{
+            maxHeap.remove(obj);
         }
         balance();
     }
 
-    private void balance() {
-        if (maxHeap.size() > minHeap.size() + 1) {
+    private void balance(){
+        if(maxHeap.size()>minHeap.size()+1){
             minHeap.offer(maxHeap.poll());
-        } else if (maxHeap.size() < minHeap.size()) {
+        }else if(maxHeap.size()<minHeap.size()){
             maxHeap.offer(minHeap.poll());
         }
     }
 
+    public static void main(String[] args) {
+        Iterator<Integer> medianIterator = new MedieanIterator<>(new Integer[]{1,5,3,2,4},3);
+        while (medianIterator.hasNext()){
+            System.out.println(medianIterator.next());
+        }
+    }
 }

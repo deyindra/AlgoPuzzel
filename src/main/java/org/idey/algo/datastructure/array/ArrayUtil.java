@@ -161,12 +161,45 @@ public class ArrayUtil {
 //        rearrange(array,evenFilter);
 //        System.out.println(Arrays.deepToString(array));
 
-        System.out.println(returnDeuplicate(new int[]{5,0,1,1,3,}));
-//        System.out.println(returnAnyDeuplicate(new int[]{3,2,3,1,1}));
+        //System.out.println(returnDeuplicate(new int[]{4,0,1,1,3,}));
+        System.out.println(returnAnyDeuplicate(new int[]{3,2,3,1,1}));
 //
 //        Integer[] arr = new Integer[]{2,3,5,9,7,4};
 //        rearrangeAlternate(arr, evenFilter);
 //        System.out.println(Arrays.deepToString(arr));
+
+        System.out.println(absoluteDistinctCountOfSortedIntegers(new int[] {-1,1,2}));
+
+    }
+
+    public static int absoluteDistinctCountOfSortedIntegers(int[] array){
+        int count = array.length;
+        int i=0,j=array.length-1;
+
+        while (i<j){
+            while (i!=j && array[i]==array[i+1]){
+                count--;
+                i++;
+            }
+            while (i!=j && array[j]==array[j-1]){
+                count--;
+                j--;
+            }
+            if(i==j)
+                break;
+
+            int sum = array[i]+array[j];
+            if(sum==0){
+                count--;
+                i++;
+                j--;
+            }else if(sum<0){
+                i++;
+            }else{
+                j--;
+            }
+        }
+        return count;
 
     }
 

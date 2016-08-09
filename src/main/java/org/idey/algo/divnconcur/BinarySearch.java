@@ -131,7 +131,7 @@ public class BinarySearch<T> {
 //            }
 //        };
 //        System.out.println(new BinarySearch<Integer>().findCountLast(new Integer[]{9,11,15,2,4,6},p));
-        //System.out.println(missingNumber(new int[] {2,4,6,8,10,12,16},2));
+        System.out.println(missingNumber(new int[] {2,4,6,8,10,12,16},2));
 //        Integer[] array = new Integer[]{9,99,999};
 //        System.out.println(new BinarySearch<Integer>().simpleBinarySearch(array, 5, new Comparator<Integer>() {
 //            @Override
@@ -142,7 +142,7 @@ public class BinarySearch<T> {
 //        Predicate<Integer> badRevisionPredicate = new BadRevisionPredicate(18);
 //        System.out.println(new BinarySearch<Integer>().findFirstBadRevision(3,17,badRevisionPredicate));
 
-//        System.out.println(new BinarySearch<Integer>().findPeak(new int[]{10, 20, 30, 40, 50}));
+        System.out.println(new BinarySearch<Integer>().findPeak(new int[]{10, 20, 30, 40, 50}));
 
 //        Predicate<Integer> p = new Predicate<Integer>() {
 //            @Override
@@ -164,18 +164,18 @@ public class BinarySearch<T> {
 //            }
 //        };
 //        System.out.println(findNumberReturningPositive(fn));
-        System.out.println(findCeil(new Integer[]{1,2,5,6,10,12},7));
-        System.out.println(findFloor(new Integer[]{1, 2, 5, 6, 10, 12},7));
-
-        System.out.println(findCount(new Integer[][]{{2, 4, 6, 9, 11}, {4, 5, 7, 11, 9}}, new Predicate<Integer>() {
-            @Override
-            public boolean process(Integer object) {
-                return object%2==0;
-            }
-        }));
-
-
-        System.out.println(getMinMax(new int[]{2,1,-1,11,16,-8}));
+//        System.out.println(findCeil(new Integer[]{1,2,5,6,10,12},7));
+//        System.out.println(findFloor(new Integer[]{1, 2, 5, 6, 10, 12},7));
+//
+//        System.out.println(findCount(new Integer[][]{{2, 4, 6, 9, 11}, {4, 5, 7, 11, 9}}, new Predicate<Integer>() {
+//            @Override
+//            public boolean process(Integer object) {
+//                return object%2==0;
+//            }
+//        }));
+//
+//
+//        System.out.println(getMinMax(new int[]{2,1,-1,11,16,-8}));
 
     }
 

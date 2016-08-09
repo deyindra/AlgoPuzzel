@@ -215,9 +215,9 @@ public class CountUniValTree<E> {
     }
 
     private static <E> TreeNode<E> returnLCA(boolean flag, TreeNode<E> root, TreeNode<E> left, TreeNode<E> right){
-        if(flag)
+        if(flag) {
             return root;
-        else if(left!=null && right!=null){
+        }else if(left!=null && right!=null){
             return  root;
         }
         else if(left!=null){

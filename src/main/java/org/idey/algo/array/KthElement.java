@@ -59,11 +59,13 @@ public class KthElement {
 
 
     public static void main(String[] args) {
-        List<Integer> list1 = Arrays.asList(2,3,5,4,1,12,11,13,16,7,8,6,10,9,17, 15, 19, 20, 18, 23, 21, 22, 25, 24, 14 ,26);
-        List<Integer> list2 = Arrays.asList(2,3,5,4,1,12,11,13,16,7,8,6,10,9,17, 15, 19, 20, 18, 23, 21, 22, 25, 24, 14 ,26);
-        Collections.sort(list2);
-        System.out.println(list2);
-        System.out.println(findKthElement(list1,6, false));
+//        List<Integer> list1 = Arrays.asList(2,3,5,4,1,12,11,13,16,7,8,6,10,9,17, 15, 19, 20, 18, 23, 21, 22, 25, 24, 14 ,26);
+//        List<Integer> list2 = Arrays.asList(2,3,5,4,1,12,11,13,16,7,8,6,10,9,17, 15, 19, 20, 18, 23, 21, 22, 25, 24, 14 ,26);
+//        Collections.sort(list2);
+//        System.out.println(list2);
+//        System.out.println(findKthElement(list1,6, false));
+        List<Integer> list = Arrays.asList(11,4,1,2,3,10,7,8,6,9,5,12);
+        System.out.println(findKthElement(list,5, false));
     }
 
 

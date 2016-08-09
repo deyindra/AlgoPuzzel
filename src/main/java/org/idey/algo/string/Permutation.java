@@ -40,7 +40,7 @@ public class Permutation {
     }
 
     public static void main(String[] args) {
-        String abc ="ABA";
+        String abc ="CBA";
         permutation2("",abc,3);
     }
 
