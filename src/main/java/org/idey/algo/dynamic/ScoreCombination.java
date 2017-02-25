@@ -65,7 +65,7 @@ public class ScoreCombination {
 
 
     public static void main(String[] args) {
-        displayAllScoreCombinations(5, new int[]{1,3});
+        displayAllScoreCombinations(63, new int[]{1,5,10,25});
     }
 
 }

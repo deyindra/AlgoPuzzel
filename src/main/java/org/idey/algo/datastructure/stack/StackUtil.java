@@ -71,7 +71,7 @@ public class StackUtil<T> {
             System.out.println(s.pop());
         }
         System.out.println(checkBalancedParantheSis("[[()]]["));
-        System.out.println(simplyUnixPath("/a//b"));
+        System.out.println(simplyUnixPath("/../a/../b/"));
     }
 
 

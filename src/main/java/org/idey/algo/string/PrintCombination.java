@@ -47,8 +47,8 @@ public class PrintCombination {
     }
 
     public static void main(String[] args) {
-        int[] array = new int[] { 3, 7, 4, 5, 2, -1,8,9};
-        populateSubset(array,0,array.length,0,7,new Stack<>());
+        int[] array = new int[] { 1,5,10,25};
+        populateSubset(array,0,array.length,0,15,new Stack<>());
 
     }
 }

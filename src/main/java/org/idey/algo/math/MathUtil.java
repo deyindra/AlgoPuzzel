@@ -63,6 +63,18 @@ public class MathUtil {
         return a*b/findGCD(a,b);
     }
 
+    public static int countSingleDigitNumber(int digit, int from, int to){
+        int count = 0;
+        for (int i = from; i <= to; i++) {
+            int j = i;
+            while (j > 0) {
+                if (j % 10 == digit)
+                    count++;
+                j /= 10;
+            }
+        }
+        return count;
+    }
 
     public static int findGCD(int... array){
         assert(array!=null && array.length>=2);
@@ -110,6 +122,45 @@ public class MathUtil {
             start=end;
             end=sum;
         }
+    }
+
+    public static int countFibonacciNumberBetweenRange(int start, int end, int high, int low){
+        int f1=start;
+        int f2 = end;
+        int f3 = start + end;
+        int count = 0;
+        while (f1<=high){
+            if(f1>=low)
+                count++;
+            f1 = f2;
+            f2 = f3;
+            f3 = f1 + f2;
+        }
+        return count;
+    }
+    //Given first is 1 and second is 1 the fibonacci series is 1,1,2,3,5,8 and 2nd non Fibonacci number is 6
+    //Given first is 3 and second is 8 the fibonacci series is 3,8,11,19,30,49 and 2nd non Fibonacci number is 5
+    public static int nthNonFibonacciNumber(int first, int second, int n){
+        if((second - first) > 1){
+            int numberOfNonFibo =  (second - first -1);
+            if(n <= numberOfNonFibo){
+                return first + n;
+            }else{
+                n = n - numberOfNonFibo;
+            }
+        }
+        int prevOfPrev = first;
+        int prev = second;
+        int curr = first + second;
+        int count = 0;
+        while (count<n){
+            count+=prevOfPrev-1;
+            prevOfPrev=prev;
+            prev=curr;
+            curr=prevOfPrev+prev;
+        }
+        return (prev-1)-(count-n);
+
     }
 
     public static int tailRecursiveFibonacii(int n, int end, int start){
@@ -224,7 +275,12 @@ public class MathUtil {
 //
 //        System.out.println("\n"+factorial(4,1));
 
-          System.out.println(findAllEvenOccuranceNumber(new int[] {1,5,1,5,5,3,3,2}));
+          //System.out.println(findAllEvenOccuranceNumber(new int[] {1,5,1,5,5,3,3,2}));
+          System.out.println(convertToBase26(52));
+          System.out.println(countFibonacciNumberBetweenRange(21,34,100,10));
+          System.out.println(nthNonFibonacciNumber(3,4,2));
+          System.out.println(countSingleDigitNumber(0,0,50));
+
     }
 
 

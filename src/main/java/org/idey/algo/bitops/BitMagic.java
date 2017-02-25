@@ -21,8 +21,14 @@ public class BitMagic {
 //        System.out.println(countNumberofNonLeadingZeroBit(3));
 //        System.out.println(toBinaryString(73));
         System.out.println(toBinaryString(Integer.MAX_VALUE));
+        System.out.println(updateBit(5,2,true));
 
+    }
 
+    public static int updateBit(int number, int k, boolean isBit1){
+        int value = isBit1 ? 1 : 0;
+        int mask = ~(1<<(k-1));
+        return (number & mask) | (value << (k-1));
     }
 
 

@@ -7,7 +7,7 @@ import java.util.Arrays;
  */
 public class PermutationEnhanced {
     public static void main(String[] args) {
-        combine("AAB".toCharArray(), new char[2], 3,2);
+        combine("ABA".toCharArray(), new char[2], 3,2);
     }
 
     public static void combine(char[] A, char[] T, int n, int r) {

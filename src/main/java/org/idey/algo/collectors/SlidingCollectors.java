@@ -109,8 +109,9 @@ public class SlidingCollectors<T> implements Collector<T, List<List<T>>, List<Li
         list.add(3);
         list.add(4);
         list.add(5);
+        list.add(6);
 
         Stream<Integer> s = list.stream();
-        s.collect(new SlidingCollectors<>(1,2)).forEach(System.out::println);
+        s.collect(new SlidingCollectors<>(3,2)).forEach(System.out::println);
     }
 }
