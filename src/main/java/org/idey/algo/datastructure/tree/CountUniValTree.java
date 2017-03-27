@@ -64,10 +64,12 @@ public class CountUniValTree<E> {
 
         TreeNode<Integer> F = new TreeNode<>(6);
         TreeNode<Integer> G = new TreeNode<>(7);
+        TreeNode<Integer> H = new TreeNode<>(8);
 
-        D.addLeft(F).addRight(G);
-        C.addLeft(D).addRight(E);
         A.addLeft(B).addRight(C);
+        B.addLeft(D).addRight(E);
+        C.addLeft(H);
+        D.addLeft(G).addRight(F);
 
         TreeNode<Integer> X = new TreeNode<>(100);
 
@@ -82,8 +84,8 @@ public class CountUniValTree<E> {
 //        System.out.println("\n");
 //        printLevelOrder(A);
 
-        System.out.println(LCA(A,G,B));
-        System.out.println(LCAMulti(A,new LinkedHashSet<>(Arrays.asList(G,F,X))));
+        System.out.println(LCA(A,E,B));
+        //System.out.println(LCAMulti(A,new LinkedHashSet<>(Arrays.asList(G,F,X))));
 
     }
 

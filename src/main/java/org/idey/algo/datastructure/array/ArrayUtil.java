@@ -2,6 +2,8 @@ package org.idey.algo.datastructure.array;
 
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ArrayUtil {
     public static <T> void segrate(T[] arr, Filter<T> filter){
@@ -86,25 +88,30 @@ public class ArrayUtil {
     // This is more generic when you want to move all the objects to the begining of the Array with same order and rest all objects (not same)
     //to the end of the array
     public static <T> void rearrange(T[] array , Filter<T> filter){
-        int i=0;
-        int firstIndex=0;
-        int secondIndex=0;
-        boolean isIndexFound=false;
-        while(i<array.length){
-            for(;i<array.length && filter.validate(array[i]);i++);
-            if(!isIndexFound)
-                firstIndex=i;
-            else
-                firstIndex = firstIndex+1;
-            for(;i<array.length && !filter.validate(array[i]);i++);
-            secondIndex=i;
-            if(secondIndex>firstIndex && secondIndex<array.length){
-                T temp = array[firstIndex];
-                array[firstIndex] = array[secondIndex];
-                array[secondIndex] = temp;
-                isIndexFound = true;
+        int i,j=0;
+        for(i=0;i<array.length;i++){
+            if(filter.validate(array[i])){
+                T obj = array[i];
+                array[i] = array[j];
+                array[j] = obj;
+                j++;
             }
         }
+    }
+
+
+    public static <T> List<T> rearrange2(T[] array, Filter<T> filter){
+        LinkedList<T> list = new LinkedList<T>();
+        int index=0;
+        for(T obj:array){
+            if(filter.validate(obj)){
+                list.add(index,obj);
+                index++;
+            }else{
+                list.addLast(obj);
+            }
+        }
+       return list;
     }
 
     //find one duplicte element
@@ -169,6 +176,12 @@ public class ArrayUtil {
 //        System.out.println(Arrays.deepToString(arr));
 
         System.out.println(absoluteDistinctCountOfSortedIntegers(new int[] {-1,1,2}));
+        Integer[] array = new Integer[]{1,3,5,2,1,8,7,4,5,10};
+        rearrange(array, object -> object%2==0);
+        System.out.println(Arrays.deepToString(array));
+        System.out.println(rearrange2(new Integer[]{1,3,5,2,1,8,7,4,5,10}, object -> object%2==0));
+
+
 
     }
 

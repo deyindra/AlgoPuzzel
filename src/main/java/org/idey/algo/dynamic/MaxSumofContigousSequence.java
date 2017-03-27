@@ -20,6 +20,6 @@ public class MaxSumofContigousSequence {
     }
 
     public static void main(String[] args) {
-        System.out.println(maxSum(new int[]{5, -2, -4, -1}));
+        System.out.println(maxSum(new int[]{5, 2, -4, 1}));
     }
 }

@@ -1,5 +1,7 @@
 package org.idey.algo.datastructure.list;
 
+import org.idey.algo.iterator.FilteredIterator.Filter;
+
 public class LinkedList<T extends Comparable<T>> implements Comparable<LinkedList<T>>{
     private LinkedNode<T> start;
     private LinkedNode<T> last;
@@ -442,5 +444,11 @@ public class LinkedList<T extends Comparable<T>> implements Comparable<LinkedLis
             for(current=this.start;current.getNext()!=null;current=current.getNext());
             this.last=current;
         }
+    }
+
+    public void rearrange(Filter<T> filter){
+        int length = getLength();
+
+
     }
 }
