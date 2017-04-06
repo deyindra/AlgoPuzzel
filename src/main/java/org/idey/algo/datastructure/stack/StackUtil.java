@@ -36,7 +36,7 @@ public class StackUtil<T> {
         mapping.put(']','[');
 
         Set<Character> values = new HashSet<>(mapping.values());
-
+        boolean isPop = false;
         char[] array = str.toCharArray();
         Stack<Character> stack = new Stack<>();
         for(char ch:array){
@@ -48,12 +48,20 @@ public class StackUtil<T> {
                     char stackValue = stack.peek();
                     if (value == stackValue) {
                         stack.pop();
+                        if(!isPop){
+                            isPop= true;
+                        }else{
+                            System.out.println("Uncessary paranthesis");
+                            return false;
+                        }
                     }else{
                         return false;
                     }
                 }else{
                     return false;
                 }
+            }else{
+                isPop = false;
             }
         }
         return stack.empty();
@@ -70,7 +78,7 @@ public class StackUtil<T> {
         while(!s.empty()){
             System.out.println(s.pop());
         }
-        System.out.println(checkBalancedParantheSis("[[()]]["));
+        System.out.println(checkBalancedParantheSis("{((daD))asaS}"));
         System.out.println(simplyUnixPath("/../a/../b/"));
     }
 

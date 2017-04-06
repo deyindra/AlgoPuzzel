@@ -81,18 +81,24 @@ public class LinkedListUtil {
        LinkedNode<Integer> node4 = new LinkedNode<>(4);
        LinkedNode<Integer> node41 = new LinkedNode<>(41);
 //
+        LinkedList<Integer> list = new LinkedList<>();
+        list.addNode(node1).addNode(node2).addNode(node3).addNode(node4);
+        list.getLast().setNext(node2);
 
-        LinkedList<Integer> linkedList1 = new LinkedList<>();
-        LinkedNode<Integer> node5 = new LinkedNode<>(5);
-        LinkedNode<Integer> node6 = new LinkedNode<>(6);
-        LinkedNode<Integer> node7 = new LinkedNode<>(7);
-//        LinkedNode<Integer> node8 = new LinkedNode<>(8);
-//        LinkedNode<Integer> node9 = new LinkedNode<>(9);
+        System.out.println(hasCycle(list));
+        System.out.println(list.getLast().getNext());
+
+//        LinkedList<Integer> linkedList1 = new LinkedList<>();
+//        LinkedNode<Integer> node5 = new LinkedNode<>(5);
+//        LinkedNode<Integer> node6 = new LinkedNode<>(6);
+//        LinkedNode<Integer> node7 = new LinkedNode<>(7);
+////        LinkedNode<Integer> node8 = new LinkedNode<>(8);
+////        LinkedNode<Integer> node9 = new LinkedNode<>(9);
+////
+//        linkedList.addNode(node1).addNode(node2).addNode(node3).addNode(node4).addNode(node41);
+//        linkedList1.addNode(node5).addNode(node6).addNode(node7);
 //
-        linkedList.addNode(node1).addNode(node2).addNode(node3).addNode(node4).addNode(node41);
-        linkedList1.addNode(node5).addNode(node6).addNode(node7);
-
-        linkedList1.merge(linkedList);
+//        linkedList1.merge(linkedList);
 
 //       LinkedList<Integer> linkedList = new LinkedList<>();
 //       LinkedNode<Integer> node1 = new LinkedNode<>(1);
@@ -135,11 +141,15 @@ public class LinkedListUtil {
 //        System.out.println(linkedList.isPallinDrome());
 //        linkedList.reverseLinkedList();;
 
-        for(LinkedNode<Integer> linkedNode=linkedList1.getStart();linkedNode!=null;linkedNode=linkedNode.getNext()){
-            System.out.println(linkedNode);
-        }
+
+
+//        for(LinkedNode<Integer> linkedNode=linkedList1.getStart();linkedNode!=null;linkedNode=linkedNode.getNext()){
+//            System.out.println(linkedNode);
+//        }
 
 
 
     }
+
+
 }
