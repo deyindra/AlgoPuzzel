@@ -2,7 +2,7 @@ package org.idey.algo.iterator;
 
 import java.util.*;
 
-public class PowerSetIterator<E> implements Iterator<Set<E>>,Iterable<Set<E>>{
+public class PowerSetIterator<E> implements Iterator<List<E>>,Iterable<List<E>>{
     private E[] arr = null;
     private BitSet bset = null;
 
@@ -19,12 +19,14 @@ public class PowerSetIterator<E> implements Iterator<Set<E>>,Iterable<Set<E>>{
     }
 
     @Override
-    public Set<E> next() {
-        Set<E> returnSet = new TreeSet<>();
+    public List<E> next() {
+        List<E> returnSet = new ArrayList<E>();
         for(int i = 0; i < arr.length; i++)
         {
             if(bset.get(i))
                 returnSet.add(arr[i]);
+            else
+                returnSet.add(null);
         }
         //increment bset
         for(int i = 0; i < bset.size(); i++)
@@ -46,7 +48,7 @@ public class PowerSetIterator<E> implements Iterator<Set<E>>,Iterable<Set<E>>{
     }
 
     @Override
-    public Iterator<Set<E>> iterator() {
+    public Iterator<List<E>> iterator() {
         return this;
     }
 
