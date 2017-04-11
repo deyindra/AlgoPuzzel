@@ -67,6 +67,30 @@ public class StackUtil<T> {
         return stack.empty();
     }
 
+    public static int findValidParentheses(String s, int start, int end, int step, char cc) {
+        int maxLen = 0, count = 0, len = 0;
+        for (int i=start; i!=end; i+=step) {
+            if (s.charAt(i)==cc) {
+                ++count;
+            } else {
+                if (count>0) {
+                    // exist a matching
+                    --count;
+                    len += 2;
+                    if (count==0) maxLen = Math.max(maxLen, len);
+                } else {
+                    // no matching
+                    len = 0;
+                }
+            }
+        }
+        return maxLen;
+    }
+
+    public static int longestValidParenthesis2(String str){
+        return Math.max(findValidParentheses(str, 0, str.length(), 1, '('),
+                findValidParentheses(str, str.length()-1, -1, -1, ')'));
+    }
 
     public static void main(String[] args) {
         Stack<Integer> s = new Stack<>();
@@ -75,11 +99,12 @@ public class StackUtil<T> {
         s.push(2);
         s.push(11);
         sort(s);
-        while(!s.empty()){
-            System.out.println(s.pop());
-        }
-        System.out.println(checkBalancedParantheSis("{((daD))asaS}"));
-        System.out.println(simplyUnixPath("/../a/../b/"));
+//        while(!s.empty()){
+//            System.out.println(s.pop());
+//        }
+//        System.out.println(checkBalancedParantheSis("{((daD))asaS}"));
+//        System.out.println(simplyUnixPath("/../a/../b/"));
+        System.out.println(StackUtil.longestValidParenthesis2("())()()())"));
     }
 
 
