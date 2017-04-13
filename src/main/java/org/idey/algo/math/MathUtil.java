@@ -276,11 +276,49 @@ public class MathUtil {
 //        System.out.println("\n"+factorial(4,1));
 
           //System.out.println(findAllEvenOccuranceNumber(new int[] {1,5,1,5,5,3,3,2}));
-          System.out.println(convertToBase26(52));
-          System.out.println(countFibonacciNumberBetweenRange(21,34,100,10));
-          System.out.println(nthNonFibonacciNumber(3,4,2));
-          System.out.println(countSingleDigitNumber(0,0,50));
+//          System.out.println(convertToBase26(52));
+//          System.out.println(countFibonacciNumberBetweenRange(21,34,100,10));
+//          System.out.println(nthNonFibonacciNumber(3,4,2));
+//          System.out.println(countSingleDigitNumber(0,0,50));
 
+            System.out.println(printPalinDromeNumber(900,5));
+    }
+
+    public static int numberOfPalindromicProblem(int n){
+        if((n & 1) != 0){
+            n = n/2;
+        }else{
+            n = n/2 -1;
+        }
+        return (int)(9 * Math.pow(10,n));
+    }
+
+    public static int printPalinDromeNumber(int n, int k){
+        if(k<=0){
+            throw new IllegalArgumentException("Invalid value of "+k);
+        }
+
+        int totalNumberOfPalinDromicNumber = numberOfPalindromicProblem(k);
+
+        if(n<1 || n>totalNumberOfPalinDromicNumber){
+            throw new IllegalArgumentException("Nth digit should be range between 1 and "+totalNumberOfPalinDromicNumber);
+        }
+
+        int temp = (k & 1) !=0 ? k/2 : k/2 -1;
+        int palindrome = (int)Math.pow(10, temp);
+        palindrome += n - 1;
+
+        int actualNumber = palindrome;
+        if ((k & 1)!=0)
+            palindrome /= 10;
+
+        while (palindrome!=0)
+        {
+            actualNumber = actualNumber*10 + palindrome % 10;
+            palindrome /= 10;
+        }
+
+        return actualNumber;
     }
 
 
