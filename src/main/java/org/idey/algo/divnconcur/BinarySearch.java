@@ -31,18 +31,20 @@ public class BinarySearch<T> {
             if(comparator.compare(source[middle],object)==0)
                 return middle;
             //low=1,middle=5,object=4
-            if(comparator.compare(source[low],source[middle])<=0){
+            if(comparator.compare(source[low],source[middle])<0){
                 if(comparator.compare(source[low],object)<=0 && comparator.compare(object,source[middle])<0){
                     high=middle-1;
                 }else{
                     low=middle+1;
                 }
-            }else{
+            }else if(comparator.compare(source[low], source[middle])>0){
                 if(comparator.compare(source[middle],object)<0 && comparator.compare(object,source[high])<=0){
                     low=middle+1;
                 }else{
                     high=middle-1;
                 }
+            }else{
+                low++;
             }
         }
 
@@ -177,6 +179,20 @@ public class BinarySearch<T> {
 //
 //        System.out.println(getMinMax(new int[]{2,1,-1,11,16,-8}));
           System.out.println(new BinarySearch<Integer>().searchOddOne(new Integer[]{1,1,2,2,3,4,4},0,6));
+          System.out.println(new BinarySearch<Integer>().binarySearch(new Integer[]{4,5,1,2,3}, 3,new Comparator<Integer>() {
+              @Override
+              public int compare(Integer o1, Integer o2) {
+                  return o1.compareTo(o2);
+              }
+          }));
+
+          System.out.println(BinarySearch.FindPivote(new Integer[]{1,2,3,4,5,6},new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1.compareTo(o2);
+            }
+        }, 0, 5));
+
 
     }
 
@@ -263,18 +279,18 @@ public class BinarySearch<T> {
 
 
 
-    public static <T> int FindPivote(T[] array, Comparator<T> comparator){
-        int low=0;
-        int high = array.length-1;
-        while (comparator.compare(array[low],array[high])>0){
-            int middle = low + (high-low)/2;
-            if(comparator.compare(array[middle],array[high])>0){
-                low = middle+1;
-            }else{
-                high=middle;
-            }
-        }
-        return low;
+    public static <T> int FindPivote(T[] array, Comparator<T> comparator, int low, int high){
+        if (high < low)  return -1;
+        if (high == low) return low;
+
+        int mid = low + (high - low)/2;   /*low + (high - low)/2;*/
+        if (mid < high && comparator.compare(array[mid],array[mid + 1]) > 0 )
+            return mid;
+        if (mid > low && comparator.compare(array[mid],array[mid - 1]) < 0)
+            return (mid-1);
+        if (comparator.compare(array[low],array[mid]) >= 0)
+            return FindPivote(array, comparator,low, mid-1);
+        return FindPivote(array, comparator,mid + 1, high);
     }
 
     public  int findPeak(int[] array){
