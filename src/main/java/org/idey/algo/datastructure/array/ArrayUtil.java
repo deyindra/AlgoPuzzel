@@ -2,8 +2,10 @@ package org.idey.algo.datastructure.array;
 
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class ArrayUtil {
     public static <T> void segrate(T[] arr, Filter<T> filter){
@@ -175,13 +177,13 @@ public class ArrayUtil {
 //        rearrangeAlternate(arr, evenFilter);
 //        System.out.println(Arrays.deepToString(arr));
 
-        System.out.println(absoluteDistinctCountOfSortedIntegers(new int[] {-1,1,2}));
-        Integer[] array = new Integer[]{1,3,5,2,1,8,7,4,5,10};
-        rearrange(array, object -> object%2==0);
-        System.out.println(Arrays.deepToString(array));
-        System.out.println(rearrange2(new Integer[]{1,3,5,2,1,8,7,4,5,10}, object -> object%2==0));
+//        System.out.println(absoluteDistinctCountOfSortedIntegers(new int[] {-1,1,2}));
+//        Integer[] array = new Integer[]{1,3,5,2,1,8,7,4,5,10};
+//        rearrange(array, object -> object%2==0);
+//        System.out.println(Arrays.deepToString(array));
+//        System.out.println(rearrange2(new Integer[]{1,3,5,2,1,8,7,4,5,10}, object -> object%2==0));
 
-
+        System.out.println(checkDuplicateWithinK(new int[] {1,2,1,1,3,5}, 2));
 
     }
 
@@ -214,6 +216,39 @@ public class ArrayUtil {
         }
         return count;
 
+    }
+
+
+    public static boolean checkDuplicateWithinK(int[] array, int k){
+        /** Base case: when K is greater than array size **/
+        if (k > array.length || array.length == 1) {
+            return false;
+        }
+
+        /** Hash Set to hold k element **/
+        HashSet<Integer> hashSet = new HashSet<>();
+
+        /** base element **/
+        hashSet.add(array[0]);
+
+        /** Iterate one by one of array element **/
+        for (int i = 1; i < array.length; i++) {
+
+            /** If duplicate contains **/
+            if (hashSet.contains(array[i])) {
+                return true;
+            }
+
+            /** Remove first inserted element from array **/
+            if (i > k - 1) {
+                hashSet.remove(array[i - k]);
+            }
+
+            /** Insert element to hash set **/
+            hashSet.add(array[i]);
+        }
+
+        return false;
     }
 
 

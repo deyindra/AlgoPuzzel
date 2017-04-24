@@ -1,157 +1,118 @@
 package org.idey.algo.string;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Stack;
 
 public class LongestCount {
 
-    public static PriorityQueue<CharCount> returnLongest(String string, int run){
-        if(string==null || string.length()==0){
-            return null;
-        }else{
-            PriorityQueue<CharCount> priorityQueue = new PriorityQueue<>(run);
-            Map<Character, CharCount> map = new HashMap<>();
-            char[] array = string.toCharArray();
-            char repeatedChar = array[0];
-            int count = 1;
-            for(int i=1;i<array.length;i++){
-                if(array[i]==repeatedChar){
-                    count++;
-                }else{
-                    addToPriorityQueue(map,priorityQueue,run,new CharCount(repeatedChar,count));
-                    repeatedChar = array[i];
-                    count=1;
+    public static int maxConsecutiveCharCount(String str){
+        int maxCount=0;
+        int consecutiveCharCount = 1;
+        char[] array = str.toCharArray();
+        char lastChar = array[0];
+
+        for(int i=1;i<array.length;i++){
+            if(lastChar==array[i]){
+                consecutiveCharCount++;
+            }
+            if(lastChar != array[i] || i==array.length-1){
+                if(maxCount<consecutiveCharCount){
+                    maxCount = consecutiveCharCount;
                 }
-
-            }
-            addToPriorityQueue(map,priorityQueue,run,new CharCount(repeatedChar,count));
-            return priorityQueue;
-        }
-    }
-
-    public static CharCount returnLongest(String str){
-        if(str==null || str.length()==0){
-            return null;
-        }else{
-            char[] array = str.toCharArray();
-            CharCount charCount = new CharCount();
-            char maxChar = array[0];
-            int count = 1;
-            for(int i=1;i<array.length;i++){
-                if(array[i]==maxChar){
-                    count++;
-                }else{
-                    if(charCount.count<count){
-                        charCount.character=maxChar;
-                        charCount.count=count;
-                        maxChar=array[i];
-                        count=1;
-                    }
-                }
-            }
-            if(charCount.count<count){
-                charCount.character=maxChar;
-                charCount.count=count;
-            }
-            return charCount;
-        }
-    }
-
-    private static void addToPriorityQueue(Map<Character, CharCount> map, PriorityQueue<CharCount> priorityQueue, int run, CharCount charCount){
-        CharCount oldCharCount = map.get(charCount.character);
-        if(oldCharCount==null){
-            map.put(charCount.character, charCount);
-        }else{
-            if(oldCharCount.compareTo(charCount)<0){
-                priorityQueue.remove(oldCharCount);
-                map.put(charCount.character, charCount);
-            }else{
-                return;
+                consecutiveCharCount=1;
+                lastChar = array[i];
             }
         }
-
-        int size = priorityQueue.size();
-        if(size<run){
-            priorityQueue.add(charCount);
-        }else{
-            CharCount head = priorityQueue.peek();
-            if(head.compareTo(charCount)<0){
-                priorityQueue.poll();
-                map.remove(head.character);
-                priorityQueue.add(charCount);
-            }
-        }
+        return maxCount;
     }
 
 
+    public static Stack<CharCount> getNCharCount(String str, boolean isMax, int limit){
+        PriorityQueue<CharCount> priorityQueue = new PriorityQueue<>((o1, o2) ->
+                isMax ? (o1.count-o2.count) : -(o1.count-o2.count));
+
+        char[] array = str.toCharArray();
+        char lastChar = array[0];
+        int consecutiveCharCount = 1;
 
 
-        private static class CharCount implements Comparable<CharCount>{
-        private Character character;
+        for(int i=1;i<array.length;i++){
+            if(lastChar==array[i]){
+                consecutiveCharCount++;
+            }
+            if(lastChar != array[i] || i==array.length-1){
+                CharCount charCount = new CharCount(lastChar,consecutiveCharCount);
+                addCharCount(charCount,priorityQueue,isMax,limit);
+                consecutiveCharCount=1;
+                lastChar = array[i];
+            }
+        }
+
+        Stack<CharCount> charCounts = new Stack<>();
+        while (!priorityQueue.isEmpty()){
+            charCounts.push(priorityQueue.poll());
+        }
+        return charCounts;
+    }
+
+    private static class CharCount{
+        private char ch;
         private int count;
 
-            private CharCount() {
-            }
-
-            public CharCount(Character character, int count) {
-            if(character==null){
-                throw new IllegalArgumentException("Invalid char");
-            }
-            this.character = character;
-            if(count<=0){
-                throw new IllegalArgumentException("Invalid Count");
-            }
+        public CharCount(char ch, int count) {
+            this.ch = ch;
             this.count = count;
         }
 
         @Override
-        public String toString() {
-            final StringBuilder sb = new StringBuilder("CharCount{");
-            sb.append("character=").append(character);
-            sb.append(", count=").append(count);
-            sb.append('}');
-            return sb.toString();
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            CharCount charCount = (CharCount) o;
+
+            if (ch != charCount.ch) return false;
+            return count == charCount.count;
         }
 
         @Override
-        public int compareTo(CharCount o) {
-            if(o==null){
-                return 1;
-            }else if(this==o){
-                return 0;
+        public int hashCode() {
+            int result = (int) ch;
+            result = 31 * result + count;
+            return result;
+        }
+
+        @Override
+        public String toString() {
+            return "CharCount{" +
+                    "ch=" + ch +
+                    ", count=" + count +
+                    '}';
+        }
+    }
+
+    public static void addCharCount(CharCount charCount,PriorityQueue<CharCount> priorityQueue,
+                                                       boolean isMax, int limit){
+        if(priorityQueue.contains(charCount)){
+            priorityQueue.remove(charCount);
+            priorityQueue.offer(charCount);
+        }else{
+            int size = priorityQueue.size();
+            if(size<limit){
+                priorityQueue.offer(charCount);
             }else{
-                int comp = this.count - o.count;
-                if(comp==0){
-                    return this.character.compareTo(o.character);
+                CharCount head = priorityQueue.peek();
+                if(isMax? (head.count<charCount.count) : (head.count>charCount.count)){
+                    priorityQueue.poll();
+                    priorityQueue.offer(charCount);
                 }
-                return comp;
             }
         }
-
-            @Override
-            public boolean equals(Object o) {
-                if (this == o) return true;
-                if (o == null || getClass() != o.getClass()) return false;
-
-                CharCount charCount = (CharCount) o;
-
-                if (character != null ? !character.equals(charCount.character) : charCount.character != null)
-                    return false;
-
-                return true;
-            }
-
-            @Override
-            public int hashCode() {
-                return character != null ? character.hashCode() : 0;
-            }
-        }
+    }
 
     public static void main(String[] args) {
-        System.out.println(returnLongest("ab",2));
-        System.out.println(returnLongest("aaabbbbaaaaa"));
-
+        System.out.println(maxConsecutiveCharCount("CCBBBCCCCC"));
+        System.out.println(getNCharCount("CCBBBBBBBC",true,2));
     }
 
 }

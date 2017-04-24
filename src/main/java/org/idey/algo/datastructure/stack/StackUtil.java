@@ -104,7 +104,7 @@ public class StackUtil<T> {
 //        }
 //        System.out.println(checkBalancedParantheSis("{((daD))asaS}"));
 //        System.out.println(simplyUnixPath("/../a/../b/"));
-        System.out.println(StackUtil.longestValidParenthesis2("())()()())"));
+        System.out.println(StackUtil.longestValidParenthesis2("((())"));
     }
 
 
