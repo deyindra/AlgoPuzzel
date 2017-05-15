@@ -36,7 +36,6 @@ public class StackUtil<T> {
         mapping.put(']','[');
 
         Set<Character> values = new HashSet<>(mapping.values());
-        boolean isPop = false;
         char[] array = str.toCharArray();
         Stack<Character> stack = new Stack<>();
         for(char ch:array){
@@ -48,49 +47,36 @@ public class StackUtil<T> {
                     char stackValue = stack.peek();
                     if (value == stackValue) {
                         stack.pop();
-                        if(!isPop){
-                            isPop= true;
-                        }else{
-                            System.out.println("Uncessary paranthesis");
-                            return false;
-                        }
                     }else{
                         return false;
                     }
                 }else{
                     return false;
                 }
-            }else{
-                isPop = false;
             }
         }
         return stack.empty();
     }
 
-    public static int findValidParentheses(String s, int start, int end, int step, char cc) {
-        int maxLen = 0, count = 0, len = 0;
-        for (int i=start; i!=end; i+=step) {
-            if (s.charAt(i)==cc) {
-                ++count;
-            } else {
-                if (count>0) {
-                    // exist a matching
-                    --count;
-                    len += 2;
-                    if (count==0) maxLen = Math.max(maxLen, len);
-                } else {
-                    // no matching
-                    len = 0;
-                }
+    public static int findValidParentheses(String s) {
+        int maxLen=0;
+        Stack<Integer> stack = new Stack<>();
+        stack.push(-1);
+        char[] array = s.toCharArray();
+        for(int i=0;i<array.length;i++){
+            if(array[i]=='('){
+                stack.push(i);
+            }else{
+                stack.pop();
+                if(!stack.isEmpty())
+                    maxLen = Math.max(maxLen, i-stack.peek());
+                else
+                    stack.push(i);
             }
         }
         return maxLen;
     }
 
-    public static int longestValidParenthesis2(String str){
-        return Math.max(findValidParentheses(str, 0, str.length(), 1, '('),
-                findValidParentheses(str, str.length()-1, -1, -1, ')'));
-    }
 
     public static void main(String[] args) {
         Stack<Integer> s = new Stack<>();
@@ -102,9 +88,11 @@ public class StackUtil<T> {
 //        while(!s.empty()){
 //            System.out.println(s.pop());
 //        }
-//        System.out.println(checkBalancedParantheSis("{((daD))asaS}"));
+        System.out.println(checkBalancedParantheSis("{{((daD))asaS}}"));
+        System.out.println(checkBalancedParantheSis("{()(}"));
+
 //        System.out.println(simplyUnixPath("/../a/../b/"));
-        System.out.println(StackUtil.longestValidParenthesis2("((())"));
+        System.out.println(StackUtil.findValidParentheses("()(())))"));
     }
 
 

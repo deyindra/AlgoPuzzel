@@ -120,6 +120,27 @@ public class BinarySearch<T> {
             }
     }
 
+    public static int findMagicIndex(int[] array, int low, int high){
+        if(low>high)
+            return -1;
+        int mid = low + (high - low)/2;
+        int midValue = array[mid];
+        if(midValue == mid)
+            return mid;
+
+
+        int leftIndex = Math.min(mid-1, midValue);
+        int left = findMagicIndex(array, low, leftIndex);
+        if(left>=0)
+            return left;
+
+        int rightIndex = Math.max(mid+1, midValue);
+        int right = findMagicIndex(array, rightIndex, high);
+
+        return right;
+
+    }
+
     public static void main(String[] args) {
 //        Integer[] array = {1,1,4,3,3,2,2};
 //        System.out.println(new BinarySearch<Integer>().searchOddOne(array, 0, array.length - 1));
@@ -191,6 +212,8 @@ public class BinarySearch<T> {
             }
         }));
 
+
+         System.out.println(findMagicIndex(new int[]{-1,3,3,4,4,6,6},0,6));
 
     }
 

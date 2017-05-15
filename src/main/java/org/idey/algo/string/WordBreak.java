@@ -39,6 +39,6 @@ public class WordBreak {
     }
 
     public static void main(String[] args) {
-        System.out.println(wordBreak("   \"ANC E\"FG    XYZ  1  AMC \"ANC\" ABC  XYZ H    "));
+        System.out.println(wordBreak("   \"ANC E\" FG    XYZ  1  AMC \"ANC\" ABC  XYZ H    "));
     }
 }

@@ -41,7 +41,7 @@ public class Util {
 
     public static void main(String[] args) {
         System.out.println(instanceOf(new Integer[]{1,2,3}, Number[].class));
-        System.out.println((new Integer[]{1,2,3} instanceof Object[]));
+        System.out.println(instanceOf(new Integer[]{1,2,3}, Object[].class));
     }
 
 }

@@ -78,5 +78,18 @@ public class KFrequentElement<T extends  Comparable<T>> {
         return stack;
     }
 
+    public static void main(String[] args) {
+        KFrequentElement<String> frequentElement = new KFrequentElement<>(2, true);
+        frequentElement.add("Apple");
+        frequentElement.add("Banana");
+        frequentElement.add("Mango");
+        frequentElement.add("Apple");
+        frequentElement.add("Mango");
+        frequentElement.add("Mango");
+
+        System.out.println(frequentElement.returnElements());
+
+    }
+
 
 }
