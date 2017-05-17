@@ -1,6 +1,7 @@
 package org.idey.algo.array;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MorrisPatternSearch {
@@ -62,6 +63,8 @@ public class MorrisPatternSearch {
 
     public static void main(String[] args) {
         System.out.println(KMP(new Integer[]{1,2,1,2,1}, new Integer[]{1,2,1}));
+        System.out.println(Arrays.toString(computeTemporaryArray(new Character[]{'a','b','c','a','b','y'})));
+
     }
 
 }

@@ -184,6 +184,16 @@ public class ArrayUtil {
 //        System.out.println(rearrange2(new Integer[]{1,3,5,2,1,8,7,4,5,10}, object -> object%2==0));
 
         System.out.println(checkDuplicateWithinK(new int[] {1,2,1,1,3,5}, 2));
+        System.out.println(returnDeuplicate(new int[]{2,3,1,1}));
+        Integer[] array = new Integer[]{1, 2, 3, -4, -5};
+       setAlternate(array, new Filter<Integer>() {
+            @Override
+            public boolean validate(Integer object) {
+                return object>=0;
+            }
+        });
+
+        System.out.println(Arrays.deepToString(array));
 
     }
 
@@ -215,6 +225,43 @@ public class ArrayUtil {
             }
         }
         return count;
+
+    }
+
+    public static <T> void setAlternate(T[] array, Filter<T> filter){
+        int i,j, possize,negsize,k;
+        i=0;
+        j = array.length -1;
+        while (i<j){
+            while (filter.validate(array[i]))
+                    i++;
+            while (!filter.validate(array[j]))
+                j--;
+
+            if(i<j){
+                T temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+        }
+        possize=i;
+        negsize= array.length-j-1;
+
+        if((possize==0)||(negsize==0))
+            return;
+
+        k=0;
+        j=array.length-negsize;
+
+        while(k<array.length-1){
+            if((k%2!=0)&&(k!=array.length-1)){
+                T temp=array[k];
+                array[k]=array[j];
+                array[j] = temp;
+                j++;
+            }
+            k++;
+        }
 
     }
 
