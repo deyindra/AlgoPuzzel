@@ -58,11 +58,11 @@ public class FlattentNestedIterator<T>  implements Iterator<T>{
 
     public static void main(String[] args) {
         List<Nested<Integer>> nesteds = new ArrayList<>();
-        nesteds.add(new Nested.NestedBuiler<Integer>().withObject(1));
-        nesteds.add(new Nested.NestedBuiler<Integer>().withIterator(null));
-        nesteds.add(new Nested.NestedBuiler<Integer>().withIterator(Arrays.asList(new Nested.NestedBuiler<Integer>().withObject(null),
-                new Nested.NestedBuiler<Integer>().withObject(2),
-                new Nested.NestedBuiler<Integer>().withObject(3)).iterator()));
+        nesteds.add(new Nested.NestedBuidler<Integer>().withObject(1));
+        nesteds.add(new Nested.NestedBuidler<Integer>().withIterator(null));
+        nesteds.add(new Nested.NestedBuidler<Integer>().withIterator(Arrays.asList(new Nested.NestedBuidler<Integer>().withObject(null),
+                new Nested.NestedBuidler<Integer>().withObject(2),
+                new Nested.NestedBuidler<Integer>().withObject(3)).iterator()));
 
         FlattentNestedIterator<Integer> it = new FlattentNestedIterator<>(nesteds.iterator());
         while (it.hasNext()){

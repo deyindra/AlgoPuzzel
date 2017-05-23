@@ -185,7 +185,7 @@ public class ArrayUtil {
 
         System.out.println(checkDuplicateWithinK(new int[] {1,2,1,1,3,5}, 2));
         System.out.println(returnDeuplicate(new int[]{2,3,1,1}));
-        Integer[] array = new Integer[]{1, 2, 3, -4, -5};
+        Integer[] array = new Integer[]{1,3,-4,2,-5};
        setAlternate(array, new Filter<Integer>() {
             @Override
             public boolean validate(Integer object) {

@@ -25,7 +25,7 @@ public class Nested<T> {
         return isObject;
     }
 
-    public static class NestedBuiler<T>{
+    public static class NestedBuidler<T>{
         public Nested<T> withObject(T object){
             return new Nested<>(object, null, true);
         }
