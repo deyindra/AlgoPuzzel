@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Stack;
 
-public class FlattentNestedIterator<T>  implements Iterator<T>{
+public class FlattenNestedIterator<T>  implements Iterator<T>{
     private Stack<Iterator<Nested<T>>> stack = new Stack<>();
     private T current;
     private boolean hasNext;
-    public FlattentNestedIterator(Iterator<Nested<T>>  nestedIterator) {
+    public FlattenNestedIterator(Iterator<Nested<T>>  nestedIterator) {
         if(nestedIterator == null){
             throw new IllegalArgumentException("Invalid Iterator");
         }
@@ -64,7 +64,7 @@ public class FlattentNestedIterator<T>  implements Iterator<T>{
                 new Nested.NestedBuidler<Integer>().withObject(2),
                 new Nested.NestedBuidler<Integer>().withObject(3)).iterator()));
 
-        FlattentNestedIterator<Integer> it = new FlattentNestedIterator<>(nesteds.iterator());
+        FlattenNestedIterator<Integer> it = new FlattenNestedIterator<>(nesteds.iterator());
         while (it.hasNext()){
             System.out.println(it.next());
         }
