@@ -17,23 +17,19 @@ public class Boundqueue<T> {
         while(this.queue.size() == this.size) {
             wait();
         }
-        if(this.queue.size() == 0) {
-            notifyAll();
-        }
         this.queue.add(item);
+        notifyAll();
     }
 
 
-    public synchronized Object dequeue()
+    public synchronized T dequeue()
             throws InterruptedException{
         while(this.queue.size() == 0){
             wait();
         }
-        if(this.queue.size() == this.size){
-            notifyAll();
-        }
-
-        return this.queue.remove(0);
+        T object = this.queue.remove(0);
+        notifyAll();
+        return object;
     }
 
     private static class Producer implements Runnable{

@@ -111,8 +111,8 @@ public class LongestCount {
     }
 
     public static void main(String[] args) {
-        System.out.println(maxConsecutiveCharCount("CCBBBCCCCC"));
-        System.out.println(getNCharCount("CCBCCCC",true,2));
+        System.out.println(maxConsecutiveCharCount("CCCCCBBBCC"));
+        System.out.println(getNCharCount("CCCCCBBBCCAAAAAA",true,3));
     }
 
 }

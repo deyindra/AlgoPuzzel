@@ -60,8 +60,8 @@ public class RotatingQueue<T> implements Queue<T>{
         queue.offer(2);
         queue.offer(3);
         System.out.println(queue.poll());
-        queue.offer(4);
-        queue.offer(5);
+//        queue.offer(4);
+//        queue.offer(5);
         System.out.println(queue.poll());
         System.out.println(queue.size());
         System.out.println(queue.poll());
