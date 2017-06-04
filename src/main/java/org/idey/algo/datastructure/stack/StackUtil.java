@@ -91,7 +91,7 @@ public class StackUtil<T> {
         System.out.println(checkBalancedParantheSis("{{((daD))asaS}}"));
         System.out.println(checkBalancedParantheSis("{()(}"));
 
-//        System.out.println(simplyUnixPath("/../a/../b/"));
+        System.out.println(simplyUnixPath("/../a/../b/"));
         System.out.println(StackUtil.findValidParentheses("()(())))"));
     }
 

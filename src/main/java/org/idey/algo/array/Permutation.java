@@ -28,9 +28,31 @@ public class Permutation {
         }
     }
 
+    public static void generateAllAnagrams(String prefix, String str, List<String> list, int length){
+        int n = prefix.length();
+        int m = str.length();
+        if(n==length){
+            list.add(prefix);
+        }else{
+            for(int i=0;i<m;i++){
+                char ch = str.charAt(i);
+                if(str.indexOf(ch, i+1)!=-1){
+                    continue;
+                }
+                generateAllAnagrams(prefix+ch,str.substring(0,i)+str.substring(i+1,m),list,length);
+            }
+        }
+    }
+
+    public static List<String> getAllAnagrams(String str){
+        List<String> list = new ArrayList<>();
+        generateAllAnagrams("",str,list,str.length());
+        return list;
+    }
 
 
     public static void main(String[] args) {
         perm2(Arrays.asList('A','A','B'),new ArrayList<>(),2);
+        System.out.println(getAllAnagrams("AAB"));
     }
 }
