@@ -1,8 +1,6 @@
 package org.idey.algo.string;
 
-import java.util.Comparator;
 import java.util.PriorityQueue;
-import java.util.Stack;
 
 public class LongestCount {
 
@@ -93,12 +91,8 @@ public class LongestCount {
 
 
     public static PriorityQueue<CharCount> getTopNCharCount(String str, boolean isMax, int limit){
-        PriorityQueue<CharCount> priorityQueue = new PriorityQueue<>(new Comparator<CharCount>() {
-            @Override
-            public int compare(CharCount o1, CharCount o2) {
-                return isMax ? (o1.count - o2.count) : -(o1.count - o2.count);
-            }
-        });
+        PriorityQueue<CharCount> priorityQueue = new PriorityQueue<>((o1, o2) ->
+                isMax ? (o1.count - o2.count) : -(o1.count - o2.count));
         char[] array = str.toCharArray();
         int startIndex = 0;
         int count=1;
