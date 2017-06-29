@@ -2,24 +2,44 @@ package org.idey.algo.datastructure.tree;
 
 import org.idey.algo.datastructure.list.LinkedList;
 import org.idey.algo.datastructure.list.LinkedNode;
+import org.idey.algo.iterator.tree.InOrderTreeIterator;
+
+import java.util.*;
 
 public class TreeUtil {
-    public static <E extends Comparable<E>> boolean isBST(TreeNode<E> node, TreeNode<E> prevNode){
-        if(node!=null){
-            if(!isBST(node.getLeft(),prevNode)){
-                return false;
-            }
-            if(prevNode!=null && node.getData().compareTo(prevNode.getData())<=0){
-                return false;
-            }
-            prevNode = node;
-            return isBST(node.getRight(),prevNode);
+    public static <E extends Comparable<E>> boolean isBST(TreeNode<E> root, TreeNodeWrapper<E> wrapper){
+       if(root==null)
+           return true;
+       else {
+           if (!isBST(root.getLeft(), wrapper)) {
+               return false;
+           }
+           if (wrapper.getNode() != null && root.getData().compareTo(wrapper.getNode().getData()) < 0) {
+               return false;
+           }
+           wrapper.setNode(root);
+           return isBST(root.getRight(), wrapper);
+       }
+    }
+
+    private static class TreeNodeWrapper<E>{
+        private TreeNode<E> node;
+
+        public TreeNodeWrapper(TreeNode<E> node) {
+            this.node = node;
         }
-        return true;
+
+        public TreeNode<E> getNode() {
+            return node;
+        }
+
+        public void setNode(TreeNode<E> node) {
+            this.node = node;
+        }
     }
 
     public static <E extends Comparable<E>> boolean isBST(TreeNode<E> node){
-        return isBST(node,null);
+        return isBST(node, new TreeNodeWrapper<>(null));
     }
 
     public static <E> void reverseTree(TreeNode<E> root){
@@ -37,16 +57,16 @@ public class TreeUtil {
 
     public static void main(String args[]) {
 
-//        TreeNode<Integer> root = new TreeNode<>(4);
-//        root.addLeft(new TreeNode<>(2)).addRight(new TreeNode<>(5));
-//        root.getLeft().addLeft(new TreeNode<>(2));
-//        root.getLeft().addRight(new TreeNode<>(3));
-//
-//
-//        if(isBST(root))
-//            System.out.println("IS BST");
-//        else
-//            System.out.println("Not a BST");
+        TreeNode<Integer> root = new TreeNode<>(4);
+        root.addLeft(new TreeNode<>(2)).addRight(new TreeNode<>(5));
+        root.getLeft().addLeft(new TreeNode<>(2));
+        root.getLeft().addRight(new TreeNode<>(7));
+
+
+        if(isBST(root))
+            System.out.println("IS BST");
+        else
+            System.out.println("Not a BST");
 //
 //        deleteTree(root);
 
@@ -59,7 +79,7 @@ public class TreeUtil {
         System.out.println(isBST(treeNode1));
         System.out.println(ceil(treeNode,5));
         System.out.println(floor(treeNode,5));
-
+        System.out.println(findAllNodes(buildBst(new Integer[]{1,2,3,4,5,7,8,9,10}), 6));
     }
 
 
@@ -169,5 +189,56 @@ public class TreeUtil {
             }
         }
         return larger==null?null:larger.getData();
+    }
+
+    //Time O(n) and Space O(longN)
+    public static List<Integer> findAllNodes(final TreeNode<Integer> tree, final int sum){
+        List<Integer> list = new ArrayList<>();
+        Stack<TreeNode<Integer>> left = new Stack<>();
+        Stack<TreeNode<Integer>> right = new Stack<>();
+
+        TreeNode<Integer> leftCurrent = tree;
+        TreeNode<Integer> rightCurrent = tree;
+
+        while (!left.isEmpty() || !right.isEmpty() || leftCurrent!=null || rightCurrent!=null){
+            if (leftCurrent != null || rightCurrent != null) {
+                if (leftCurrent != null) {
+                    left.push(leftCurrent);
+                    leftCurrent = leftCurrent.getLeft();
+                }
+
+                if (rightCurrent != null) {
+                    right.push(rightCurrent);
+                    rightCurrent = rightCurrent.getRight();
+                }
+            }else{
+                TreeNode<Integer> leftValue = left.peek();
+                TreeNode<Integer> rightValue = right.peek();
+
+                int leftVal = leftValue.getData() ;
+                int rightVal = rightValue.getData();
+
+                if(leftValue==rightValue){
+                    break;
+                }
+
+                if(leftVal + rightVal == sum){
+                    list.add(leftVal);
+                    list.add(rightVal);
+                    leftCurrent = left.pop();
+                    leftCurrent = leftCurrent.getRight();
+                    rightCurrent = right.pop();
+                    rightCurrent = rightCurrent.getLeft();
+                }else if(leftVal + rightVal < sum){
+                    leftCurrent = left.pop();
+                    leftCurrent = leftCurrent.getRight();
+                }else{
+                    rightCurrent = right.pop();
+                    rightCurrent = rightCurrent.getLeft();
+                }
+            }
+
+        }
+        return list;
     }
 }

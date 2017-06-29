@@ -1,9 +1,9 @@
 package org.idey.algo.datastructure.tree;
 
 public class TreeNode<E> {
-    private E data;
-    private TreeNode<E> left;
-    private TreeNode<E> right;
+    E data;
+    TreeNode<E> left;
+    TreeNode<E> right;
 
     public TreeNode(E data) {
         this.data = data;

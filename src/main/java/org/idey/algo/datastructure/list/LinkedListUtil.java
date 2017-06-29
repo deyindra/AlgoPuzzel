@@ -1,5 +1,7 @@
 package org.idey.algo.datastructure.list;
 
+import org.idey.algo.iterator.FilteredIterator;
+
 public class LinkedListUtil {
 //    public static <T> boolean isPallinDrome(LinkedList<T> linkedList){
 //        return isPallinDrome(linkedList.getStart(), linkedList.getStart());
@@ -147,8 +149,18 @@ public class LinkedListUtil {
 //            System.out.println(linkedNode);
 //        }
 
+        linkedList.addNode(node1).addNode(node2).addNode(node3).addNode(node4).addNode(node41);
+        linkedList.rearrange(new FilteredIterator.Filter<Integer>() {
+            @Override
+            public boolean isValid(Integer obj) {
+                return obj%2==0;
+            }
+        });
 
-
+        System.out.println(linkedList);
+        for(LinkedNode<Integer> current = linkedList.getStart(); current!=null; current = current.getNext()){
+            System.out.print(current);
+        }
     }
 
 

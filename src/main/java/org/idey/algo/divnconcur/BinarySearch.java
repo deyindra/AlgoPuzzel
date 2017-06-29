@@ -215,6 +215,8 @@ public class BinarySearch<T> {
 
          System.out.println(findMagicIndex(new int[]{-1,3,3,4,4,6,6},0,6));
 
+         System.out.println(findMin(new int[]{2, 2, 2, 2, 2, 2, 2, 0, 0, 1, 1, 2}));
+
     }
 
 
@@ -392,6 +394,36 @@ public class BinarySearch<T> {
 
         return findCrossOverIndex(array,middle+1, high,x);
     }
+
+    public static int findMin(int[] num) {
+        return findMin(num, 0, num.length-1);
+    }
+
+    public static int findMin(int[] num, int low, int high){
+        if(high==low){
+            return num[low];
+        }
+        if(high == low +1){
+            return Math.min(num[low], num[high]);
+        }
+        // 3 3 1 3 3 3
+
+        int middle = (high-low)/2 + low;
+        // already sorted
+        if(num[high] > num[low]){
+            return num[low];
+            //right shift one
+        }else if(num[high] == num[low]){
+            return findMin(num, low+1, high);
+            //go right
+        }else if(num[middle] >= num[low]){
+            return findMin(num, middle, high);
+            //go left
+        }else{
+            return findMin(num, low, middle);
+        }
+    }
+
 
     public static void printKthClosedElement(int[] array,int x, int k){
         int left = findCrossOverIndex(array,0,array.length-1,x);

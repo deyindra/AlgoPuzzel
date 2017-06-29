@@ -447,8 +447,44 @@ public class LinkedList<T extends Comparable<T>> implements Comparable<LinkedLis
     }
 
     public void rearrange(Filter<T> filter){
-        int length = getLength();
+       LinkedNode<T> firstStart = null;
+       LinkedNode<T> firstend = null;
+       LinkedNode<T> secondStart = null;
+       LinkedNode<T> secondend = null;
 
+       LinkedNode<T> currentNode = this.start;
+       while (currentNode!=null){
+           if(filter.isValid(currentNode.getObject())){
+               if(firstStart==null){
+                   firstStart = currentNode;
+                   firstend = firstStart;
+               }else{
+                   firstend.setNext(currentNode);
+                   firstend = firstend.getNext();
+               }
+           }else{
+               if(secondStart==null){
+                   secondStart = currentNode;
+                   secondend = secondStart;
+               }else{
+                   secondend.setNext(currentNode);
+                   secondend = secondend.getNext();
+               }
 
+           }
+           currentNode = currentNode.getNext();
+       }
+
+        if(firstStart == null || secondStart == null) {
+            return;
+        }
+
+       firstend.setNext(secondStart);
+       secondend.setNext(null);
+       this.start = firstStart;
+       this.last = secondend;
     }
+
+
+
 }
