@@ -16,36 +16,36 @@ public class BitSet {
     {
         if(k>size)
             throw new IllegalArgumentException("Invalid position");
-        int remender = k & 0x1F;
-        int devide = k >> 5;
-        numbers[devide] = numbers[devide] | (1<<remender);
+        int reminder = k & 0x1F;
+        int divide = k >> 5;
+        numbers[divide] = numbers[divide] | (1<<reminder);
     }
 
     public void clear(int k)
     {
         if(k>size)
             throw new IllegalArgumentException("Invalid position");
-        int remender = k & 0x1F;
-        int devide = k >> 5;
-        numbers[devide] = numbers[devide] & (~(1<<remender));
+        int reminder = k & 0x1F;
+        int divide = k >> 5;
+        numbers[divide] = numbers[divide] & (~(1<<reminder));
     }
 
     public boolean get(int k)
     {
         if(k>size)
             throw new IllegalArgumentException("Invalid position");
-        int remender = k & 0x1F;
-        int devide = k >> 5;
-        return (numbers[devide] & (1<<remender))!=0;
+        int reminder = k & 0x1F;
+        int divide = k >> 5;
+        return (numbers[divide] & (1<<reminder))!=0;
     }
 
     public void toggle(int k)
     {
         if(k>=size)
             throw new IllegalArgumentException("Invalid position");
-        int remender = k & 0x1F;
-        int devide = k >> 5;
-        numbers[devide] = numbers[devide] ^ (1 << remender);
+        int reminder = k & 0x1F;
+        int divide = k >> 5;
+        numbers[divide] = numbers[divide] ^ (1 << reminder);
     }
 
     public int getSize() {

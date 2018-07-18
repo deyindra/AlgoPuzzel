@@ -197,7 +197,7 @@ public class BinarySearch<T> {
 //
 //
 //        System.out.println(getMinMax(new int[]{2,1,-1,11,16,-8}));
-          System.out.println(new BinarySearch<Integer>().searchOddOne(new Integer[]{1,1,2,2,3,4,4},0,6));
+          System.out.println(new BinarySearch<Integer>().searchOddOne(new Integer[]{1,1,2,2,2,2,3,3,3,3,4,4,4},0,12));
           System.out.println(new BinarySearch<Integer>().binarySearch(new Integer[]{2,2,2,1,2}, 2,new Comparator<Integer>() {
               @Override
               public int compare(Integer o1, Integer o2) {

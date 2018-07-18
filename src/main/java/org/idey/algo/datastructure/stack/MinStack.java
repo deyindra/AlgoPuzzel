@@ -3,10 +3,10 @@ package org.idey.algo.datastructure.stack;
 
 import java.util.Stack;
 
-public class MinMaxStack<T extends Comparable<T>> extends java.util.Stack<T> {
+public class MinStack<T extends Comparable<T>> extends java.util.Stack<T> {
     private Stack<T> minStack;
 
-    public MinMaxStack() {
+    public MinStack() {
         this.minStack = new Stack<>();
     }
 
@@ -42,15 +42,15 @@ public class MinMaxStack<T extends Comparable<T>> extends java.util.Stack<T> {
     }
 
     public static void main(String[] args) {
-        MinMaxStack<Integer> minMaxStack = new MinMaxStack<>();
-        minMaxStack.push(1);
-        minMaxStack.push(2);
-        minMaxStack.push(-12);
+        MinStack<Integer> minStack = new MinStack<>();
+        minStack.push(1);
+        minStack.push(2);
+        minStack.push(-12);
 
-        System.out.println(minMaxStack.getMin());
-        minMaxStack.pop();
+        System.out.println(minStack.getMin());
+        minStack.pop();
 
-        System.out.println(minMaxStack.getMin());
+        System.out.println(minStack.getMin());
 
     }
 }

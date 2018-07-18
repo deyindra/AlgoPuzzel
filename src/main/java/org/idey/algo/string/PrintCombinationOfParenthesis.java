@@ -3,7 +3,7 @@ package org.idey.algo.string;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PrintCombinationOfParanthesis {
+public class PrintCombinationOfParenthesis {
     public static List<String> generateParenthesis(int n) {
         List<String> result = new ArrayList<>();
         dfs(result, "", n, n);
