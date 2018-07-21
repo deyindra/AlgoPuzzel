@@ -6,20 +6,19 @@ public class FindMejority {
         int mejityIndex=0;
         int count=1;
         for(int i=1;i<array.length;i++){
-            if(array[i].equals(array[mejityIndex])){
-                count++;
-            }else{
-                count--;
-            }
             if(count==0){
                 mejityIndex=i;
                 count=1;
+            }else if(array[i].equals(array[mejityIndex])){
+                count++;
+            }else{
+                count--;
             }
         }
         return array[mejityIndex];
     }
 
     public static void main(String[] args) {
-        System.out.println(findMejority(new Integer[]{1,1,5,6,5,7,7,7,5,6,5,10,5}));
+        System.out.println(findMejority(new Integer[]{1,3,1,1,4,1,2,2}));
     }
 }
