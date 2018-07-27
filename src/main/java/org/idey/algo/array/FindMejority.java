@@ -19,6 +19,6 @@ public class FindMejority {
     }
 
     public static void main(String[] args) {
-        System.out.println(findMejority(new Integer[]{1,3,1,1,4,1,2,2}));
+        System.out.println(findMejority(new Integer[]{1,3,3,4,3,3}));
     }
 }
