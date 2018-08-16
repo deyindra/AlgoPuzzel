@@ -36,9 +36,9 @@ public class PrimeNumber {
     }
 
     public static void main(String[] args) {
-        PrimeNumber primeNumber=new PrimeNumber(2);
+        PrimeNumber primeNumber=new PrimeNumber(5);
         int count=0;
-        for(int i=0;i<=2000;i++){
+        for(int i=0;i<=5;i++){
             if(primeNumber.isPrime(i)){
                 count++;
                 System.out.print(i+" ");

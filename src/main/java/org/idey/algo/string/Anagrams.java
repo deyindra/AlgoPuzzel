@@ -23,7 +23,6 @@ public class Anagrams {
     }
 
     private static long generatePrimeHash(String str){
-        populatePrimeTable();
         assert (str!=null && str.trim().length()>0);
         char[] array = str.toCharArray();
         long hash=1;
@@ -36,6 +35,7 @@ public class Anagrams {
 
 
     public Collection<List<String>> groupAnagrams(List<String> list){
+        populatePrimeTable();
         Map<Long, List<String>> map=null;
         if(list!=null && !list.isEmpty()){
             map = new HashMap<>();
@@ -48,11 +48,11 @@ public class Anagrams {
                 subList.add(str);
                 map.put(prime,subList);
             }
-        }
-        if(map!=null){
             return map.values();
+        }else{
+            return null;
         }
-        return null;
+
     }
 
     public Collection<List<String>> groupAnagrams2(List<String> list){
@@ -76,7 +76,7 @@ public class Anagrams {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Anagrams().groupAnagrams2(Arrays.asList("cat", "act", "dog", "god", "test")));
+        System.out.println(new Anagrams().groupAnagrams(Arrays.asList("cat", "act", "dog", "god", "test")));
     }
 
 }

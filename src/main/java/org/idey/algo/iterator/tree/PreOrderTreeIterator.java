@@ -8,7 +8,7 @@ public class PreOrderTreeIterator<E> extends AbstractTreeDFSIterator<E> {
 
     public PreOrderTreeIterator(TreeNode<E> root) {
         super(root);
-        stack.add(root);
+        stack.push(root);
     }
 
 

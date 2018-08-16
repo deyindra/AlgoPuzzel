@@ -80,7 +80,7 @@ public class SqureRoot {
 
     public static void main(String[] args) {
         System.out.println(power(2,-2));
-        System.out.println(nthroot(2,3d,.01d));
+        System.out.println(nthroot(3,3d,.01d));
 //        float d = (1>>2);
 //        System.out.println(d);
 
