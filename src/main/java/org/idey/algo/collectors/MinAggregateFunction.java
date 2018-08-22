@@ -12,9 +12,7 @@ public  class MinAggregateFunction<T extends Comparable<T>> extends AggregateFun
         final List<T> list = new ArrayList<>();
         for(List<TimeSeriesType<T>> valList:lists){
             Optional<TimeSeriesType<T>> optional = valList.stream().sorted().min(new CustomComparator<>());
-            if(optional.isPresent()){
-                list.add(optional.get().getObject());
-            }
+            optional.ifPresent(tTimeSeriesType -> list.add(tTimeSeriesType.getObject()));
         }
         return list;
     }

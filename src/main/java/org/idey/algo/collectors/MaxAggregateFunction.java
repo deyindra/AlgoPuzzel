@@ -12,9 +12,7 @@ public  class MaxAggregateFunction<T extends Comparable<T>> extends AggregateFun
         final List<T> list = new ArrayList<>();
         for(List<TimeSeriesType<T>> valList:lists){
             Optional<TimeSeriesType<T>> optional = valList.stream().sorted().max(new CustomComparator<>());
-            if(optional.isPresent()){
-                list.add(optional.get().getObject());
-            }
+            optional.ifPresent(tTimeSeriesType -> list.add(tTimeSeriesType.getObject()));
         }
         return list;
     }

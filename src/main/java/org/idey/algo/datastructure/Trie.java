@@ -61,7 +61,7 @@ public class Trie<T> {
         if(node.isEnd()){
             map.put(prefix, node.getValue());
         }
-        TrieNode[] array = node.getArray();
+        TrieNode<T>[] array = node.getArray();
         for(int i=0;i<array.length;i++){
             if(array[i]!=null){
                 populateList(array[i],map,prefix+(char)(i));
@@ -74,6 +74,7 @@ public class Trie<T> {
         private Optional<T> value;
         private final TrieNode<T>[] array;
 
+        @SuppressWarnings("unchecked")
         public TrieNode() {
             this.array = new TrieNode[256];
             value = Optional.empty();

@@ -5,7 +5,11 @@ public class BitSet {
     private int size;
     public BitSet(int k){
         this.size = k;
-        numbers = new int[(k >> 5) +1];
+        int arrayLength = this.size >> 5;
+        if((this.size & 31) != 0){
+            arrayLength++;
+        }
+        numbers = new int[arrayLength];
     }
 
     public BitSet(){
@@ -55,8 +59,8 @@ public class BitSet {
     public static void main(String[] args) {
         BitSet set = new BitSet(Integer.MAX_VALUE);
         System.out.println(set.numbers.length);
-        set.set(Integer.MAX_VALUE);
-        System.out.println(set.get(Integer.MAX_VALUE));
+        set.set(32);
+        System.out.println(set.get(32));
     }
 
 }
