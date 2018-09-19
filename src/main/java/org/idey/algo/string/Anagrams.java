@@ -13,8 +13,8 @@ public class Anagrams {
             primeTables = new int[128];
             PrimeNumber primeNumber = new PrimeNumber(10000);
             int j=0;
-            for(int i=0;i<=10000;i++){
-                if(primeNumber.isPrime(i) && j<primeTables.length){
+            for(int i=0;i<=10000 && j<primeTables.length;i++){
+                if(primeNumber.isPrime(i)){
                     primeTables[j]=i;
                     j++;
                 }

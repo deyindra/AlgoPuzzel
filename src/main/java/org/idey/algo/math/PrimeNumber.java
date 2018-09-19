@@ -17,10 +17,10 @@ public class PrimeNumber {
 
 
     private void fillSieve(){
-        for(int i=2;i<=upperLimit;i++){
+        for(int i=2;i<upperLimit;i++){
             boolean isPrime = this.bitSet.get(i);
             if(isPrime){
-                for (int j=2;i*j<=upperLimit;j++) {
+                for (int j=2;i*j<upperLimit;j++) {
                     bitSet.set(i*j,false);
                 }
             }
@@ -36,9 +36,9 @@ public class PrimeNumber {
     }
 
     public static void main(String[] args) {
-        PrimeNumber primeNumber=new PrimeNumber(5);
+        PrimeNumber primeNumber=new PrimeNumber(8);
         int count=0;
-        for(int i=0;i<=5;i++){
+        for(int i=0;i<=8;i++){
             if(primeNumber.isPrime(i)){
                 count++;
                 System.out.print(i+" ");

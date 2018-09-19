@@ -40,7 +40,8 @@ public class Trie<T> {
     public Map<String, T>  words(String prefix){
         TrieNode<T> node = searchPrefix(prefix);
         Map<String, T>  map = new LinkedHashMap<>();
-        populateList(node,map,prefix);
+        if(node!= null)
+            populateList(node,map,prefix);
         return map;
     }
 
@@ -120,7 +121,8 @@ public class Trie<T> {
         trie.insert("Joshua","555-555-1345");
         trie.insert("Bob","123-456-7899");
 
-        System.out.println(trie.search("Jo"));
+        System.out.println(trie.words("JA"));
+        System.out.println(trie.words("Jo"));
         System.out.println(trie.words());
         System.out.println(trie.words("Josh"));
     }

@@ -93,6 +93,7 @@ public class StackUtil<T> {
 
         System.out.println(simplyUnixPath("/../a/../b/"));
         System.out.println(StackUtil.findValidParentheses("()(())))"));
+        System.out.println(StackUtil.findMaxDepth("((()(())))"));
     }
 
 

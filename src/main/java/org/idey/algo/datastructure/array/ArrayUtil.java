@@ -27,24 +27,7 @@ public class ArrayUtil {
         }
     }
 
-    public static <T> void rearrangeAlternate(T[] arr, Filter<T> filter){
-        if(arr.length>1) {
-            segrate(arr, filter);
-            int left = 1;
-            int high = 0;
-            while (filter.validate(arr[high])) {
-                high++;
-            }
-            int right = high;
-            while (filter.validate(arr[left]) && right < arr.length) {
-                T temp = arr[left];
-                arr[left] = arr[right];
-                arr[right] = temp;
-                left = left + 2;
-                right++;
-            }
-        }
-    }
+
 
 
 
@@ -173,9 +156,14 @@ public class ArrayUtil {
         //System.out.println(returnDeuplicate(new int[]{4,0,1,1,3,}));
         System.out.println(returnAnyDeuplicate(new int[]{3,2,3,1,1}));
 //
-//        Integer[] arr = new Integer[]{2,3,5,9,7,4};
-//        rearrangeAlternate(arr, evenFilter);
-//        System.out.println(Arrays.deepToString(arr));
+        Integer[] arr = new Integer[]{2,3,5,9,7,4};
+        ArrayUtil.rearrange(arr, new Filter<Integer>() {
+            @Override
+            public boolean validate(Integer object) {
+                return object%2==0;
+            }
+        });
+        System.out.println("Hello" + Arrays.deepToString(arr));
 
 //        System.out.println(absoluteDistinctCountOfSortedIntegers(new int[] {-1,1,2}));
 //        Integer[] array = new Integer[]{1,3,5,2,1,8,7,4,5,10};

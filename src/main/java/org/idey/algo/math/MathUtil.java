@@ -282,6 +282,7 @@ public class MathUtil {
 //          System.out.println(countSingleDigitNumber(0,0,50));
 
             System.out.println(printPalinDromeNumber(900,5));
+            printEvenNumber(new int[]{1,3,1,3,3,2,5,2,5});
     }
 
     public static int numberOfPalindromicProblem(int n){
@@ -354,7 +355,16 @@ public class MathUtil {
         return factorial(n-1, n*a);
     }
 
+    public static void printEvenNumber(int[] array){
+        int oddOne=0;
+        int uniqOne=0;
 
+        for(int i:array){
+            oddOne = oddOne ^ i;
+        }
+        System.out.println(oddOne);
+
+    }
 
 
 }

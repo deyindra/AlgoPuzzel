@@ -15,23 +15,35 @@ public class ReverseWord {
         }
     }
 
-    public static void reverseWord(String str){
+    public static String reverseWord(String str){
         char[] array = str.toCharArray();
-        int startOfWord=0;
-        for(int i=0;i<array.length;i++){
-            if(i==array.length-1){
-                reverse(array,startOfWord,i);
-            }else if(array[i]==' '){
-                reverse(array,startOfWord,i-1);
-                for(;i<array.length && array[i]==' ';i++)
-                startOfWord=i+1;
+        int start =0;
+        int end = array.length - 1;
+        reverse(array,start,end);
+
+        //skip all the leading ans trailing space
+        while (start<=end && array[start]==' ')
+            start++;
+
+        //skip all the leading ans trailing space
+        while (end>=start && array[end]==' ')
+            end--;
+
+
+        for(int j=start;j<=end;j++){
+            if(array[j] == ' '){
+                reverse(array,start,j-1);
+                j++;
+                while (array[j] == ' ')
+                    j++;
+                start = j;
             }
         }
-        reverse(array,0,array.length-1);
-        System.out.println(new String(array));
+        reverse(array,start,end);
+        return String.valueOf(array);
     }
 
     public static void main(String[] args) {
-        reverseWord("I   am   ok");
+        System.out.println("======"+reverseWord("    I   am   ok  ")+"=======");
     }
 }

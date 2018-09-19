@@ -3,8 +3,8 @@ package org.idey.algo.bitops;
 public class BitSet {
     private int[] numbers;
     private int size;
-    public BitSet(int k){
-        this.size = k;
+    public BitSet(int size){
+        this.size = size;
         int arrayLength = this.size >> 5;
         if((this.size & 31) != 0){
             arrayLength++;
@@ -18,7 +18,7 @@ public class BitSet {
 
     public void set(int k)
     {
-        if(k>size)
+        if(k>=size)
             throw new IllegalArgumentException("Invalid position");
         int reminder = k & 0x1F;
         int divide = k >> 5;
@@ -27,7 +27,7 @@ public class BitSet {
 
     public void clear(int k)
     {
-        if(k>size)
+        if(k>=size)
             throw new IllegalArgumentException("Invalid position");
         int reminder = k & 0x1F;
         int divide = k >> 5;
@@ -36,7 +36,7 @@ public class BitSet {
 
     public boolean get(int k)
     {
-        if(k>size)
+        if(k>=size)
             throw new IllegalArgumentException("Invalid position");
         int reminder = k & 0x1F;
         int divide = k >> 5;
@@ -57,10 +57,10 @@ public class BitSet {
     }
 
     public static void main(String[] args) {
-        BitSet set = new BitSet(Integer.MAX_VALUE);
+        BitSet set = new BitSet(64);
         System.out.println(set.numbers.length);
-        set.set(32);
-        System.out.println(set.get(32));
+        set.set(63);
+        System.out.println(set.get(63));
     }
 
 }

@@ -21,6 +21,7 @@ public class BitMagic {
 //        System.out.println(countNumberofNonLeadingZeroBit(3));
 //        System.out.println(toBinaryString(73));
         System.out.println(toBinaryString(Integer.MAX_VALUE));
+        System.out.println(isPallindrome(-5));
         System.out.println(updateBit(5,2,true));
 
     }
