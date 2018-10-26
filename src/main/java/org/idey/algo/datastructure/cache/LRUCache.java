@@ -54,13 +54,6 @@ public class LRUCache<K,V> {
         }
     }
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("LRUCache{");
-        sb.append("doubleLinkedList=").append(doubleLinkedList);
-        sb.append('}');
-        return sb.toString();
-    }
 
     private  class Node<K1,V1>{
         private K1 key;
@@ -73,14 +66,6 @@ public class LRUCache<K,V> {
             this.value = value;
         }
 
-        @Override
-        public String toString() {
-            final StringBuilder sb = new StringBuilder("Node{");
-            sb.append("key=").append(key);
-            sb.append(", value=").append(value);
-            sb.append('}');
-            return sb.toString();
-        }
     }
 
     private  class DoubleLinkedList<K2,V2>{
@@ -113,17 +98,6 @@ public class LRUCache<K,V> {
                 end = head;
         }
 
-        @Override
-        public String toString() {
-            final StringBuilder sb = new StringBuilder();
-            Node<K2,V2> n = head;
-            String seperator="";
-            while (n!=null){
-                sb.append(seperator).append(n.toString());
-                n = n.next;
-            }
-            return sb.toString();
-        }
     }
 
 

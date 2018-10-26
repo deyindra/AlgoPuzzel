@@ -20,6 +20,7 @@ public class StringUtil {
     public static List<String> generateCombination(String str,final char[] newArray){
         List<String> combinations = new ArrayList<>();
         generateCombination(str.toCharArray(),0,"",newArray, combinations);
+        System.out.println(combinations.size());
         return combinations;
     }
 

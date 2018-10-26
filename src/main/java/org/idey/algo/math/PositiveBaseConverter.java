@@ -47,7 +47,7 @@ public enum PositiveBaseConverter {
     public static void main(String[] args) {
         long number = new Random().nextInt(10)+1;
         System.out.println(number);
-        String encode = BASE62.encode(number);
+        String encode = BASE62.encode(178);
         System.out.println(encode);
         System.out.println(BASE62.decode(encode));
     }

@@ -44,7 +44,7 @@ public class MaximumOfKSubarray {
 
 
     public static void main(String[] args) {
-        List<Integer> integers = getMaxSubArray(new Integer[]{1,-1,3,1,2,7},3);
+        List<Integer> integers = getMaxSubArray(new Integer[]{1,-1,3,1,2,7},5);
         System.out.println(integers);
     }
 }

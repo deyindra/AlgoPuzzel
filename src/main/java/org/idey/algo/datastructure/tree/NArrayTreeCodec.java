@@ -37,8 +37,7 @@ public class NArrayTreeCodec<E> {
 
 
     public NArrayTreeNode<E> deserialize(String data, String seperator) {
-        Deque<String> nodes = new LinkedList<>();
-        nodes.addAll(Arrays.asList(data.split(seperator)));
+        Deque<String> nodes = new LinkedList<>(Arrays.asList(data.split(seperator)));
         return buildTree(nodes);
     }
 

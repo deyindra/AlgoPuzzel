@@ -281,7 +281,7 @@ public class MathUtil {
 //          System.out.println(nthNonFibonacciNumber(3,4,2));
 //          System.out.println(countSingleDigitNumber(0,0,50));
 
-            System.out.println(printPalinDromeNumber(900,5));
+            System.out.println(printPalinDromeNumber(3,4));
             printEvenNumber(new int[]{1,3,1,3,3,2,5,2,5});
     }
 
@@ -333,6 +333,37 @@ public class MathUtil {
         }else{
             return n/i+countZeoInFactorialRecurrsive(n, i*5);
         }
+    }
+
+    public static boolean isPalindrome(int number){
+        int finalNumber = number;
+        if(finalNumber<0){
+            finalNumber = 0-finalNumber;
+        }
+
+        int divisor = 1;
+        while ((finalNumber/divisor)>=10){
+            divisor = divisor*10;
+        }
+        while (finalNumber!=0){
+            int leading = finalNumber / divisor;
+            int trailing = finalNumber % 10;
+
+            // If first and last digit
+            // not same return false
+            if (leading != trailing)
+                return false;
+
+            // Removing the leading and trailing
+            // digit from number
+            finalNumber = (finalNumber % divisor) / 10;
+
+            // Reducing divisor by a factor
+            // of 2 as 2 digits are dropped
+            divisor = divisor / 100;
+        }
+        return true;
+
     }
 
     public static <T> T getRandomObjectWithGivenProbability(T[] array, Integer[] frequency){

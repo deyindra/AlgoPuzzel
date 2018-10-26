@@ -61,7 +61,7 @@ public abstract class AssociativeOperation {
     }
 
     public static void main(String[] args) {
-        AssociativeOperation operation = new MultiplyOperation();
+        AssociativeOperation operation = new AddOperation();
         int[] array = AssociativeOperation.getOutput(new int[]{10,1,2,3}, operation);
         System.out.println(Arrays.toString(array));
     }

@@ -45,7 +45,7 @@ public class Permutation {
 
     public static void main(String[] args) {
         String abc ="ABA";
-        permutation2("",abc,3);
+        permutation2("",abc,2);
     }
 
 }

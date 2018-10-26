@@ -25,8 +25,7 @@ public class PowerSetIterator<E> implements Iterator<List<E>>,Iterable<List<E>>{
         {
             if(bset.get(i))
                 returnSet.add(arr[i]);
-            else
-                returnSet.add(null);
+
         }
         //increment bset
         for(int i = 0; i < bset.size(); i++)

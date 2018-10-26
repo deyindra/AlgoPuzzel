@@ -46,8 +46,7 @@ public class TreePrintAllPath {
         index++;
 
         if(node.getLeft()==null && node.getRight()==null ){
-           List<E> newList = new ArrayList<>();
-           newList.addAll(list.subList(0,index));
+            List<E> newList = new ArrayList<>(list.subList(0, index));
            lists.add(newList);
         }else{
             addPath(node.getLeft(),index,list,lists);

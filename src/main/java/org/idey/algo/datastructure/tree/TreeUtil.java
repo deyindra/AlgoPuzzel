@@ -3,6 +3,7 @@ package org.idey.algo.datastructure.tree;
 import org.idey.algo.datastructure.list.LinkedList;
 import org.idey.algo.datastructure.list.LinkedNode;
 import org.idey.algo.iterator.tree.InOrderTreeIterator;
+import sun.security.provider.Sun;
 
 import java.util.*;
 
@@ -80,6 +81,19 @@ public class TreeUtil {
         System.out.println(ceil(treeNode,5));
         System.out.println(floor(treeNode,5));
         System.out.println(findAllNodes(buildBst(new Integer[]{1,2,3,4,5,7,8,9,10}), 6));
+
+        TreeNode<Integer> sumRoot  = new TreeNode<>(3);
+        sumRoot.addLeft(new TreeNode<>(1)).addRight(new TreeNode<>(2));
+        sumRoot.getLeft().addLeft(new TreeNode<>(5)).addRight(new TreeNode<>(6));
+        sumRoot.getRight().addLeft(new TreeNode<>(7)).addRight(new TreeNode<>(8));
+        sumRoot.getLeft().getRight().addLeft(new TreeNode<>(11));
+
+        System.out.println(isSum(sumRoot).isSum);
+
+        System.out.println(sumOfLeftLeaves(sumRoot));
+        System.out.println(sumOfLeaves(sumRoot));
+        System.out.println(sumOfRightLeaves(sumRoot));
+
     }
 
 
@@ -157,6 +171,19 @@ public class TreeUtil {
         }
     }
 
+    public static <E extends Comparable<E>> TreeNode<E> search(Comparator<TreeNode<E>> cmp, TreeNode<E> node, TreeNode<E> value){
+        if(node==null){
+            return null;
+        }
+        if(cmp.compare(value,node)==0){
+            return value;
+        }else if(cmp.compare(node,value)>0){
+            return search(cmp, node.getLeft(), value);
+        }else{
+            return search(cmp,node.getRight(), value);
+        }
+    }
+
 
     public static <E extends Comparable<E>> E ceil(TreeNode<E> node, E value){
         TreeNode<E> smaller = null;
@@ -174,7 +201,6 @@ public class TreeUtil {
         return smaller==null?null:smaller.getData();
     }
 
-
     public static <E extends Comparable<E>> E floor(TreeNode<E> node, E value){
         TreeNode<E> larger = null;
         while (node!=null){
@@ -190,6 +216,121 @@ public class TreeUtil {
         }
         return larger==null?null:larger.getData();
     }
+
+
+    public static <E extends Comparable<E>> TreeNode<E> lcaBSTRecursive(Comparator<TreeNode<E>> cmp,TreeNode<E> node, TreeNode<E> n1, TreeNode<E> n2){
+        if(node==null){
+            return null;
+        }
+
+       if(cmp.compare(n1, node)==0 || cmp.compare(n2, node)==0){
+           return node;
+       }
+
+       if(cmp.compare(node,n2)>0){
+           return lcaBSTRecursive(cmp,node.getLeft(),n1,n2);
+       }else if(cmp.compare(n1,node)>0){
+           return lcaBSTRecursive(cmp,node.getRight(),n1,n2);
+       }else{
+           return node;
+       }
+   }
+
+    public static <E extends Comparable<E>> TreeNode<E> lcaBST(Comparator<TreeNode<E>> cmp,TreeNode<E> node, TreeNode<E> n1, TreeNode<E> n2){
+        if(node == null || search(cmp, node,n1)==null || search(cmp, node,n2)==null){
+            return null;
+        }else{
+            TreeNode<E> lca = null;
+            if(cmp.compare(n1,n2)>0){
+                lca = lcaBSTRecursive(cmp,node,n2, n1);
+            }else{
+                lca = lcaBSTRecursive(cmp,node,n1, n2);
+            }
+            return lca;
+        }
+
+
+    }
+
+    private static class Sum{
+        int sum=0;
+        boolean isSum;
+
+        public Sum(int sum, boolean isSum) {
+            this.sum = sum;
+            this.isSum = isSum;
+        }
+    }
+
+    private static Sum isSum(TreeNode<Integer> tree){
+        if(tree==null){
+            return new Sum(0,true);
+        }
+
+        if(tree.getLeft()==null || tree.getRight()==null){
+            return new Sum(tree.data,true);
+        }
+
+        Sum left = isSum(tree.getLeft());
+        Sum right = isSum(tree.getRight());
+        if(!left.isSum || !right.isSum || tree.data!=left.sum+right.sum){
+            return new Sum(tree.data+left.sum+right.sum,false);
+        }
+        return new Sum(2*tree.data,true);
+    }
+
+    public static int sumOfLeaves(TreeNode<Integer> tree){
+        int result = 0;
+        if(tree==null){
+            return result;
+        }else{
+            if(tree.getLeft()==null && tree.getRight()==null){
+                result += tree.data;
+            }
+            result+=sumOfLeaves(tree.getLeft());
+            result+=sumOfLeaves(tree.getRight());
+
+            return result;
+        }
+    }
+
+    public static int sumOfLeftLeaves(TreeNode<Integer> tree){
+        int result=0;
+        if(tree==null){
+            return result;
+        }else{
+            TreeNode<Integer> left = tree.getLeft();
+            if(left!=null) {
+                if (left.getLeft() == null && left.getRight() == null) {
+                    result = result + left.data;
+                } else {
+                    result += sumOfLeftLeaves(left);
+                }
+            }
+            result = result+sumOfLeftLeaves(tree.getRight());
+        }
+        return result;
+    }
+
+    public static int sumOfRightLeaves(TreeNode<Integer> tree){
+        int result=0;
+        if(tree==null){
+            return result;
+        }else{
+            TreeNode<Integer> right = tree.getRight();
+            if(right!=null) {
+                if (right.getLeft() == null && right.getRight() == null) {
+                    result = result + right.data;
+                } else {
+                    result += sumOfRightLeaves(right);
+                }
+            }
+            result = result+sumOfRightLeaves(tree.getLeft());
+        }
+        return result;
+    }
+
+
 
     //Time O(n) and Space O(longN)
     public static List<Integer> findAllNodes(final TreeNode<Integer> tree, final int sum){

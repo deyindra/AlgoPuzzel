@@ -40,7 +40,6 @@ public class FlattenNestedIterator<T>  implements Iterator<T>{
                     stack.push(n.getIterator());
                 }
             }
-
         }
         hasNext =false;
     }

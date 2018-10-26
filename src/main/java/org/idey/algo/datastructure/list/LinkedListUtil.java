@@ -30,7 +30,9 @@ public class LinkedListUtil {
             fast=fast.getNext().getNext();
             if(slow==fast) {
                 System.out.println(slow);
-                removeLoop(slow,linkedList.getStart());
+                System.out.println(fast.getObject());
+                //removeLoop(slow,linkedList.getStart());
+                removeLoop(linkedList,fast);
                 return true;
 
             }
@@ -38,7 +40,17 @@ public class LinkedListUtil {
         return false;
     }
 
-
+    public static <T extends Comparable<T>> void removeLoop(LinkedList<T> linkedList, LinkedNode<T> fastNode){
+        LinkedNode<T> slow = linkedList.getStart();
+        int count=0;
+        while (slow.getNext()!=fastNode.getNext()){
+            slow = slow.getNext();
+            fastNode = fastNode.getNext();
+            count++;
+        }
+        System.out.println("looping "+count);
+        fastNode.setNext(null);
+    }
     public static <T extends Comparable<T>> void removeLoop(LinkedNode<T> loop,
                                       LinkedNode<T> curr) {
         LinkedNode<T> ptr1 = null, ptr2 = null;
@@ -84,7 +96,7 @@ public class LinkedListUtil {
        LinkedNode<Integer> node41 = new LinkedNode<>(41);
 //
         LinkedList<Integer> list = new LinkedList<>();
-        list.addNode(node1).addNode(node2).addNode(node3).addNode(node4);
+        list.addNode(node1).addNode(node2).addNode(node3).addNode(node4).addNode(node41);
         list.getLast().setNext(node2);
 
         System.out.println(hasCycle(list));

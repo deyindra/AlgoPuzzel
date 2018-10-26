@@ -53,7 +53,7 @@ public class BreadthFirstIterator<T> implements Iterator<T> {
         graph.addEdge(5,null);
 
 
-       BreadthFirstIterator<Integer> bfs = new BreadthFirstIterator<>(graph,5);
+       BreadthFirstIterator<Integer> bfs = new BreadthFirstIterator<>(graph,1);
         while (bfs.hasNext()){
             System.out.println(bfs.next());
         }

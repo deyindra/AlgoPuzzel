@@ -57,7 +57,7 @@ public class BitSet {
     }
 
     public static void main(String[] args) {
-        BitSet set = new BitSet(64);
+        BitSet set = new BitSet(65);
         System.out.println(set.numbers.length);
         set.set(63);
         System.out.println(set.get(63));

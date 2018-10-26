@@ -108,6 +108,21 @@ public class ArrayUtil {
         return result;
     }
 
+    public static void printDuplicate(int[] array){
+        int n = array.length;
+        for(int i=0;i<n;i++){
+            int index = array[i]%n;
+            array[index] = array[index]+n;
+        }
+
+        for(int i=0;i<n;i++){
+            if(array[i]/n>1){
+                System.out.println(i);
+            }
+        }
+
+    }
+
     //Number ranges from 0 to n-2
     public static int returnAnyDeuplicate(int[] array){
         int slow = array.length-1;
@@ -182,6 +197,8 @@ public class ArrayUtil {
         });
 
         System.out.println(Arrays.deepToString(array));
+
+        printDuplicate(new int[]{0,0,2,1,1});
 
     }
 

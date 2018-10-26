@@ -125,5 +125,6 @@ public class Trie<T> {
         System.out.println(trie.words("Jo"));
         System.out.println(trie.words());
         System.out.println(trie.words("Josh"));
+        System.out.println(trie.search("Jo"));
     }
 }

@@ -323,7 +323,7 @@ public class BinarySearch<T> {
         int high = array.length-1;
         while (low<=high){
             int middle = low+(high-low)/2;
-            if((middle==0) || array[middle]>=array[middle-1] && (middle==array.length-1 || array[middle]>=array[middle+1])){
+            if((middle==0 || array[middle]>=array[middle-1]) && (middle==array.length-1 || array[middle]>=array[middle+1])){
                 return array[middle];
             }else if(middle>0 && array[middle-1]>array[middle]){
                 high = middle-1;
