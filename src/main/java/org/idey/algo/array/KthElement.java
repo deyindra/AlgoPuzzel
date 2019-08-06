@@ -64,8 +64,8 @@ public class KthElement {
 //        Collections.sort(list2);
 //        System.out.println(list2);
 //        System.out.println(findKthElement(list1,6, false));
-        List<Integer> list = Arrays.asList(11,4,1,2,3,10,7,8,6,9,5,12);
-        System.out.println(findKthElement(list,5, true));
+        List<Integer> list = Arrays.asList(11,4,1,12,17,3);
+        System.out.println(findKthElement(list,2, true));
     }
 
 

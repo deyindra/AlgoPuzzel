@@ -42,6 +42,7 @@ public class StackUsing2Queus<T> implements Stack<T> {
         StackUsing2Queus<Integer> stackUsing2Queus = new StackUsing2Queus<>();
         stackUsing2Queus.push(1);
         stackUsing2Queus.push(2);
+        stackUsing2Queus.push(3);
         while (!stackUsing2Queus.isEmpty()){
             System.out.println(stackUsing2Queus.pop());
         }
