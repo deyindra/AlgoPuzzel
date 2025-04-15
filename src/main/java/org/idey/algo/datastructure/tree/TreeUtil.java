@@ -3,7 +3,6 @@ package org.idey.algo.datastructure.tree;
 import org.idey.algo.datastructure.list.LinkedList;
 import org.idey.algo.datastructure.list.LinkedNode;
 import org.idey.algo.iterator.tree.InOrderTreeIterator;
-import sun.security.provider.Sun;
 
 import java.util.*;
 
